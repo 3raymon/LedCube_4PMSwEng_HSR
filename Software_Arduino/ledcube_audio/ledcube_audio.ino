@@ -3,7 +3,7 @@
     Name:       ledcube_audio.ino
     Created:	04.10.2019 
     Author:     Michael Guntli
-	Rev:		0.2
+	Rev:		1.0
 */
 
 ////////////////////////////////////////////////////
