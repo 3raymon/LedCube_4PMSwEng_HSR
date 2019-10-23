@@ -1,8 +1,10 @@
-int incomingByte = 0; // for incoming serial data
+ // for incoming serial data
   int programm=0;
   int numberofDatabytes=0;
   int changeFlag=1;
   int defaultFlag=0;
+  byte Data[17]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  int Byteorder=0;
 
 enum{
      RESERVED = 0,
@@ -32,16 +34,19 @@ void loop()
         case RESERVED:
         {
            Serial.print("RESERVED\n");
+           printData();
           break;
         }
         case RAIN:
         {
            Serial.print("RAIN\n");
+           printData();
           break;
         }
         case RANDOM:
         {
            Serial.print("RANDOM\n");
+           printData();
           break;
         }
         case PYRAMID:
@@ -62,21 +67,25 @@ void loop()
         case LINKSRECHTS:
         {
           Serial.print("LINKSRECHTS\n");
+          printData();
           break;
         }
         case SCHLANGE:
         {
           Serial.print("SCHLANGE\n");
+          printData();
           break;
         }
         case AUDIO:
         {
           Serial.print("AUDIO\n");
+          printData();
           break;
         }
         case MATRIX:
         {
           Serial.print("MATRIX\n");
+          printData();
           break;
         }
         default:
@@ -87,7 +96,7 @@ void loop()
         }
         
       }
-      
+  //@TODO entfernen bei Einbindung
        if((numberofDatabytes!=0)&&defaultFlag==0)
           {
             Serial.print("With ");
@@ -101,19 +110,21 @@ void loop()
 
 void serialEvent() 
  {
-  incomingByte = Serial.read();
-  programm= incomingByte&0x0F;
-  numberofDatabytes=(incomingByte&0xF0)>>4;
-  changeFlag=1;
-/*  for (int i=0; i<numberofDatabytes;i++) 
+    int Detection; //Byte to detect which programm that is choosen and how many databytes are expected
+       Detection= Serial.read();
+       programm=Detection&0x0F;
+       changeFlag=1;
+       numberofDatabytes=(Detection>>4);
+       Serial.readBytes(Data,numberofDatabytes);
+ }
+
+void printData()
+{
+  for(int i=0;i<numberofDatabytes;i++)
   {
-    
-  }*/
+   Serial.print(Data[i],HEX); 
+   Serial.print("\n"); 
+  }
 }
-  /*  // read the incoming byte:
-    incomingByte = Serial.read();
-    // say what you got:
-    Serial.print("I received: 0x");
-    Serial.println(incomingByte, HEX);
-   */
+ 
     
