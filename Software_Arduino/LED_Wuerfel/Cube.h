@@ -33,12 +33,11 @@ public:
 	void zufall(void);
 	void strobo(void);
 	void aufab(void);
-	void pingpong(void);		//Noch nicht getestet
+	void pingpong(void);	
 	void snake(void);			//Noch nicht getestet
 	void gegenpyramide(void);	//Noch nicht implementiert
-	void audioanalyse(void);		//Noch nicht getestet
-	int analogUmrechnung(int value);	//Noch nicht getestet
-	//void audioAusgabe(void);	//Noch nicht getestet
+	void audioanalyse(void);	
+	int analogUmrechnung(int value);
 
 private:
 	int L1 = 22;//Ausgabewerte für jeweils 8 Leds
@@ -73,7 +72,7 @@ private:
 	int Schalter1 = 47;		//Schalter zur Funktionsauswahl
 	int Schalter2 = 48;
 	int Schalter3 = 49;
-	//int Schalter4 = 50;
+	int Schalter4 = 50;
 
 	int Status1 = 51;		//Status Leds zur Anzeige welcher Modus gewählt ist
 	int Status2 = 52;
