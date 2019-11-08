@@ -59,6 +59,7 @@ void setup()
 	cube_initTimerEvent(&cube);
 	cube.initIO();
 	Serial.begin(9600);
+	while (!Serial) {}
 }
 
 ////////////////////////////////////////////////////
