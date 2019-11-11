@@ -1,0 +1,6 @@
+PortName: COM3
+Description: USB Serial Device
+SerialNumber: 558383234353515040D0
+SystemLocation: \\.\COM3
+verndorIdentifier: 9025
+productIdentifier: 66
