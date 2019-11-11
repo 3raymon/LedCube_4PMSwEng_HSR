@@ -68,10 +68,19 @@ void Cube::initIO(void)
 
 	pinMode(ENABLE, OUTPUT);
 
+	pinMode(analogPin_0, INPUT);
+	pinMode(analogPin_1, INPUT);
+	pinMode(analogPin_2, INPUT);
+	pinMode(analogPin_3, INPUT);
+	pinMode(analogPin_4, INPUT);
+	pinMode(analogPin_5, INPUT);
+	pinMode(analogPin_6, INPUT);
+	pinMode(analogPin_7, INPUT);
+
 	pinMode(Schalter1, INPUT);
 	pinMode(Schalter2, INPUT);
 	pinMode(Schalter3, INPUT);
-	//pinMode(Schalter4, INPUT);
+	pinMode(Schalter4, INPUT);
 
 	pinMode(Status1, OUTPUT);
 	pinMode(Status2, OUTPUT);
@@ -338,11 +347,11 @@ void Cube::ebeneNachHinten(struct ledarray* struct_ptr)
 {
 	for (int z = 7; z >= 0; z--)
 	{
-		for (int y = 0; y <= 7; y++)
+		for (int y = 1; y <= 7; y++)
 		{
 			for (int x = 0; x <= 7; x++)
 			{
-				struct_ptr->a[x][y][z] = struct_ptr->a[x][y - 1][z];
+				struct_ptr->a[x][y-1][z] = struct_ptr->a[x][y][z];
 
 			}
 		}
@@ -386,12 +395,12 @@ void Cube::rain(void)			//Darstellung von Regen auf LED CUBE
 void Cube::zufall(void)
 {
 	ledarray zufallsarray;
-	for (int z2 = 0; z2 < 1500; z2++)
+	for (int z2 = 0; z2 < 1000; z2++)
 	{
 		int x;
 		int y;
 		int z;
-		x = random(0, 8);		//Zufallswerte für Regen generieren
+		x = random(0, 8);		//Zufallswerte generieren
 		y = random(0, 8);
 		z = random(0, 8);
 		zufallsarray.a[x][y][z] = { 1 };
@@ -418,7 +427,7 @@ void Cube::gegenpyramide(void)
 
 void Cube::strobo(void)
 {
-	for (int x = 0; x < 80; x++)
+	for (int x = 0; x < 40; x++)
 	{
 		einschalten();
 		delay(20);
@@ -494,7 +503,7 @@ void Cube::pingpong(void)
 	}
 	werteUebernehmen(&pingpongarray);
 	int richtung = 0; //Richtung = 0 nach unten schieben, Richtung = 1 nach oben schieben
-	for (int z4 = 0; z4 < 100; z4++)
+	for (int z4 = 0; z4 < 30; z4++)
 	{
 		do
 		{
@@ -508,7 +517,7 @@ void Cube::pingpong(void)
 			pingpongarray.a[x][y][z] = 1;
 			z++;
 			werteUebernehmen(&pingpongarray);
-			delay(20);
+			delay(40);
 		}
 		do
 		{
@@ -522,7 +531,7 @@ void Cube::pingpong(void)
 			pingpongarray.a[x][y][z] = 1;
 			z--;
 			werteUebernehmen(&pingpongarray);
-			delay(20);
+			delay(40);
 		}
 	}
 }
@@ -539,6 +548,8 @@ void Cube::snake(void)
 
 	x = random(0, 8);		//Zufälliger Startwert generieren
 	y = random(0, 8);
+
+	snakearray.a[x][y][7] = 1;
 
 	for (int z1 = 0; z1 < 100; z1++)
 	{
@@ -587,7 +598,8 @@ void Cube::audioanalyse(void)
 	ledarray audioarray;
 	int analogValues[8] = { 0 };
 
-	for (int z = 0; z < 50; z++)
+
+	for (int z = 0; z < 500; z++)
 	{
 		analogValues[0] = analogRead(analogPin_0);		//WErte einlesen von Analogeingängen
 		analogValues[1] = analogRead(analogPin_1);
@@ -612,15 +624,18 @@ void Cube::audioanalyse(void)
 				break;
 			case 1:
 				audioarray.a[x][7][0] = 1;
+				digitalWrite(Status2, HIGH);
 				break;
 			case 2:
 				audioarray.a[x][7][0] = 1;
 				audioarray.a[x][7][1] = 1;
+				digitalWrite(Status2, HIGH);
 				break;
 			case 3:
 				audioarray.a[x][7][0] = 1;
 				audioarray.a[x][7][1] = 1;
 				audioarray.a[x][7][2] = 1;
+				digitalWrite(Status2, HIGH);
 				break;
 			case 4:
 				for (int z = 0; z < 4; z++)
@@ -655,8 +670,16 @@ void Cube::audioanalyse(void)
 			default: digitalWrite(Status3, HIGH);
 			}
 		}
+		
 		werteUebernehmen(&audioarray);
-		delay(500);
+		delay(100);
+		/*for (int x = 0; x <= 7; x++)
+		{
+			for(int z = 0; z <= 7; z++)
+			{
+				audioarray.a[x][7][z] = 0;
+			}
+		}*/
 		ebeneNachHinten(&audioarray);
 	}
 }
@@ -668,51 +691,41 @@ void Cube::audioanalyse(void)
 int Cube::analogUmrechnung(int analogvalue)
 {
 	int signalstaerke;
-	if ((analogvalue > 40)& (analogvalue < 160))
+	if ((analogvalue > 500)& (analogvalue < 550))
 	{
 		signalstaerke = 1;
+		//digitalWrite(Status3, HIGH);
 	}
-	if ((analogvalue >= 160) & (analogvalue < 280))
+	if ((analogvalue >= 550) & (analogvalue < 600))
 	{
 		signalstaerke = 2;
 	}
-	if ((analogvalue >= 280) & (analogvalue < 400))
+	if ((analogvalue >= 600) & (analogvalue < 650))
 	{
 		signalstaerke = 3;
 	}
-	if ((analogvalue >= 400) & (analogvalue < 520))
+	if ((analogvalue >= 650) & (analogvalue < 700))
 	{
 		signalstaerke = 4;
 	}
-	if ((analogvalue >= 520) & (analogvalue < 640))
+	if ((analogvalue >= 700) & (analogvalue < 750))
 	{
 		signalstaerke = 5;
 	}
-	if ((analogvalue >= 640) & (analogvalue < 760))
+	if ((analogvalue >= 750) & (analogvalue < 800))
 	{
 		signalstaerke = 6;
 	}
-	if ((analogvalue >= 760) & (analogvalue < 880))
+	if ((analogvalue >= 800) & (analogvalue < 850))
 	{
 		signalstaerke = 7;
 	}
-	if (analogvalue >= 880)
+	if (analogvalue >= 850)
 	{
 		signalstaerke = 8;
 	}
-	else signalstaerke = 0;
+
 	return signalstaerke;
 }
 
-////////////////////////////////////////////////////
-//Funktion Analogwerte umrechnen für Ausgabe
-////////////////////////////////////////////////////
 
-/*void Cube::audioAusgabe(void)
-{
-	for (int z = 0; z < 50; z++)
-	{
-		audioanalyse();
-	}
-}
-*/
