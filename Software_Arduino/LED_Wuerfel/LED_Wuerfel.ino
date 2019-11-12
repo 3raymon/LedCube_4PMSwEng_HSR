@@ -9,14 +9,8 @@
 //Includes
 ////////////////////////////////////////////////////
 
-//#include <SoftwareSerial.h>
 #include "Cube.h"
-//#include "cube.h"
 #include <TimerOne.h>
-//#include <SoftwareSerial.h>
-//#include <HardwareSerial.h>
-
-
 
 ////////////////////////////////////////////////////
 //Variablen Deklaration
