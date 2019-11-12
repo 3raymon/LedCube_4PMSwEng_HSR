@@ -40,8 +40,9 @@ private:
     QSerialPort serialPort;
     char buffer[64] = {0};
     QString serialResponse;
-    int actualProgramm = 0;
+    int activeProgramm = 0;
     bool serialPortOpenFlag = false;
+    QTimer *timer = new QTimer(this);
 
     QString colActive = QString("background-color: green");
     QString colInactive = QString("background-color: 0");

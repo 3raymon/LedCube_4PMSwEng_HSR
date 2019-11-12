@@ -14,6 +14,16 @@ MainWindow::MainWindow(QWidget *parent)
     serialPortName = ui->portSelect->currentText();
     baudRate = ui->baudSelect->currentText().toInt();
 
+    //TEST
+    if(serialPort.open(QIODevice::ReadWrite)){
+        serialPortOpenFlag = true;
+    }else{
+        ui->statusLabel->setText("Could not open Port");
+    }
+
+    connect(timer, &QTimer::timeout, this, &MainWindow::onReadyRead);
+    timer->start(1000);
+
     connect(&serialPort, &QSerialPort::readyRead, this, &MainWindow::onReadyRead);
 
 }
@@ -26,6 +36,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_programm1Button_clicked()
 {
+
+    //Open Port if Not
     if(serialPort.open(QIODevice::ReadWrite)){
         serialPortOpenFlag = true;
     }else{
@@ -40,8 +52,8 @@ void MainWindow::on_programm1Button_clicked()
     serialPort.waitForBytesWritten();
 
     //Read
-    //serialPort.waitForReadyRead(10000) ? ui->statusLabel->setText("ready to read") : ui->statusLabel->setText("timeout");
-
+    //serialPort.waitForReadyRead(1000) ? ui->statusLabel->setText("ready to read") : ui->statusLabel->setText("timeout");
+    //onReadyRead();
 
 }
 
@@ -69,24 +81,28 @@ void MainWindow::on_baudSelect_currentTextChanged(const QString &arg1)
 
 void MainWindow::onReadyRead()
 {
+
     serialPort.read(buffer, 64) ? ui->statusLabel->setText("read success") : ui->statusLabel->setText("read fail");
     serialResponse = buffer;
     std::cout << "Buffer:" << buffer << std::endl;
 
     for(int i = 0; i < ProgrammUartResponse.size(); ++i){
-        serialResponse == ProgrammUartResponse[i] ? actualProgramm = i : actualProgramm = 0;
+        serialResponse == ProgrammUartResponse[i] ? activeProgramm = i : activeProgramm = 0;
     }
 
-    if(actualProgramm){
+    if(activeProgramm){
         updateStatusLabel();
         updateButtons();
         if(serialPortOpenFlag)serialPort.close();
     }
+
+    timer->start(1000);
+
 }
 
 void MainWindow::updateStatusLabel()
 {
-    switch(actualProgramm){
+    switch(activeProgramm){
     case 0:
         ui->statusLabel->setText("No active Programm");
         break;
@@ -100,7 +116,7 @@ void MainWindow::updateStatusLabel()
 void MainWindow::updateButtons()
 {
     this->setStyleSheet(colInactive);
-    switch(actualProgramm){
+    switch(activeProgramm){
     case 1:
         ui->programm1Button->setStyleSheet(colActive);
         break;
