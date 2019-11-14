@@ -19,6 +19,14 @@ public:
     ~MainWindow();
 
 private slots:
+
+    /**
+     * @brief If programm button 1 is clicked, programmcode "01" is sent.
+     *
+     * 1. buffer is cleared
+     * 2. Via serialPort programmcoe "01" is sent
+     *
+     */
     void on_programm1Button_clicked();
 
     void on_portsReloadButton_clicked();
@@ -29,46 +37,53 @@ private slots:
 
     void onReadyRead();
 
+    void bufferCheck();
+
     void updateStatusLabel();
 
     void updateButtons();
 
 private:
     Ui::MainWindow *ui;
-    QString serialPortName;
+    QString serialPortName = nullptr;
     qint32 baudRate;
     QSerialPort serialPort;
     char buffer[64] = {0};
     QString serialResponse;
     int activeProgramm = 0;
     bool serialPortOpenFlag = false;
-    QTimer *timer = new QTimer(this);
+
+    //Fusetimer
+    QTimer *fuseTimer = new QTimer(this);
+    bool fuseTimerActive = false;
+
+    int fuseTimerIterator = 0;
 
     QString colActive = QString("background-color: green");
     QString colInactive = QString("background-color: 0");
 
     QList<QByteArray> ProgrammUartRequests= {"\x00",
-                                           "\x01",
-                                           "\x02",
-                                           "\x03",
-                                           "\x04",
-                                           "\x05",
-                                           "\x06",
-                                           "\x07",
-                                           "\x08",
-                                           ""
-                                          };
+                                             "\x01",
+                                             "\x02",
+                                             "\x03",
+                                             "\x04",
+                                             "\x05",
+                                             "\x06",
+                                             "\x07",
+                                             "\x08",
+                                             ""
+                                             };
 
     QList<QString> ProgrammUartResponse= {"",
-                                          "RAIN",
-                                           "RANDOM",
-                                           "PYRAMID",
-                                           "STROBO",
-                                           "AUF/AB",
-                                           "LINKS/RECHTS",
-                                           "SCHLANGE",
-                                           "AUDIO",
-                                           "MATRIX"
+                                          "RAIN\n",
+                                          "RANDOM\n",
+                                          "PYRAMID\n",
+                                          "STROBO\n",
+                                          "AUF/AB\n",
+                                          "LINKS/RECHTS\n",
+                                          "SCHLANGE\n",
+                                          "AUDIO\n",
+                                          "MATRIX\n"
                                           };
 
 };

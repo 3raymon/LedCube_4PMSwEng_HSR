@@ -3,6 +3,27 @@
 #include <QApplication>
 #include <iostream>
 
+/*
+ * DOXYGEN HELP
+@brief - kurze Beschreibung des folgenden Codes
+@param abc - Beschreibung des Parameters abc einer Funktion
+@return - Beschreibung des Rückgabewertes einer Funktion
+@class abc - Beschreibung der Klasse abc
+@file abc.de - Beschreibung der Datei abc.de
+*/
+
+
+/**
+ * @brief get informations about attached serial port devices, its used only for debuggin.
+ *
+ * Function will write fallowing informations to cout
+ * - port name
+ * - desciption
+ * - serial number
+ * - system location
+ * - vendor identifier
+ * - product identifier
+ */
 void getSerialPortInfos();
 
 int main(int argc, char *argv[])
@@ -13,28 +34,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-
-
-
-
     return a.exec();
-
-/*
-    QSerialPort test;
-    test.setPortName("COM2");
-    test.setBaudRate(9600);
-    char *buffer = new char[64];
-    QString buffer_string;
-
-    test.open(QIODevice::ReadOnly);
-    test.waitForReadyRead(10000) ? std::cout << "ready to read" << std::endl : std::cout << "timeout" << std::endl;
-    test.read(buffer, 64) ? std::cout << "read success" << std::endl : std::cout << "ready fail" << std::endl;
-
-
-    std::cout << "Buffer:" << std::endl << buffer << std::endl;
-
-    return 0;
-*/
 }
 
 void getSerialPortInfos()

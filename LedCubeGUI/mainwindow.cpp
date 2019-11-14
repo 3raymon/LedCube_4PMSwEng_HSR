@@ -11,7 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
     //Setup
     ui->portsReloadButton->click();
     ui->baudSelect->setCurrentText("9600");
-    serialPortName = ui->portSelect->currentText();
+
+
+    //If Arduino is attached, serialPortName is set on protsReloadButton. Else it is set here
+    if(serialPortName == nullptr)serialPortName = ui->portSelect->currentText();
     baudRate = ui->baudSelect->currentText().toInt();
 
     //TEST
@@ -21,9 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
         ui->statusLabel->setText("Could not open Port");
     }
 
-    connect(timer, &QTimer::timeout, this, &MainWindow::onReadyRead);
-    timer->start(1000);
-
+    connect(fuseTimer, &QTimer::timeout, this, &MainWindow::onReadyRead);
     connect(&serialPort, &QSerialPort::readyRead, this, &MainWindow::onReadyRead);
 
 }
@@ -37,23 +38,17 @@ MainWindow::~MainWindow()
 void MainWindow::on_programm1Button_clicked()
 {
 
-    //Open Port if Not
-    if(serialPort.open(QIODevice::ReadWrite)){
-        serialPortOpenFlag = true;
-    }else{
-        ui->statusLabel->setText("Could not open Port");
-    }
-
     //Clean Buffer before writeing
     for(int i = 0; i < 64; ++i) buffer[i] = 0;
 
     //Write
     serialPort.write(ProgrammUartRequests[1]) ? ui->statusLabel->setText("written successfully") : ui->statusLabel->setText("could not write to device");
-    serialPort.waitForBytesWritten();
+    serialPort.waitForBytesWritten(100);
+
 
     //Read
-    //serialPort.waitForReadyRead(1000) ? ui->statusLabel->setText("ready to read") : ui->statusLabel->setText("timeout");
-    //onReadyRead();
+    if(fuseTimerActive)fuseTimer->start(1000);
+    //if(serialPort.waitForReadyRead(10000))onReadyRead();
 
 }
 
@@ -65,6 +60,12 @@ void MainWindow::on_portsReloadButton_clicked()
     for (const QSerialPortInfo &portsInfos : portsInfos) {
         QString s = portsInfos.portName();
         ui->portSelect->addItem(s);
+
+        //Select Arduino if avaliable
+        if(portsInfos.productIdentifier() == uint16_t(66) ){
+            serialPortName = portsInfos.portName();
+            ui->portSelect->setCurrentText(serialPortName);
+        }
     }
 
 }
@@ -81,23 +82,35 @@ void MainWindow::on_baudSelect_currentTextChanged(const QString &arg1)
 
 void MainWindow::onReadyRead()
 {
-
     serialPort.read(buffer, 64) ? ui->statusLabel->setText("read success") : ui->statusLabel->setText("read fail");
-    serialResponse = buffer;
     std::cout << "Buffer:" << buffer << std::endl;
+
+    serialResponse = buffer;
 
     for(int i = 0; i < ProgrammUartResponse.size(); ++i){
         serialResponse == ProgrammUartResponse[i] ? activeProgramm = i : activeProgramm = 0;
     }
 
+    std::cout << "activeProgramm:" << activeProgramm << std::endl;
+
     if(activeProgramm){
         updateStatusLabel();
         updateButtons();
         if(serialPortOpenFlag)serialPort.close();
+    }else if(fuseTimerActive){
+        fuseTimer->start(1000);
+        ++fuseTimerIterator;
     }
 
-    timer->start(1000);
+    if(fuseTimerActive && (fuseTimerIterator > 10)){
+        ui->statusLabel->setText("read timeout");
+        fuseTimer->stop();
+    }
+}
 
+void MainWindow::bufferCheck()
+{
+    onReadyRead();
 }
 
 void MainWindow::updateStatusLabel()
