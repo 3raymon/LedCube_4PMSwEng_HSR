@@ -39,7 +39,7 @@ enum {
 		RESERVED = 0,
 		RAIN,
 		RANDOM,
-		PYRAMID,
+		PINGPONG,
 		STROBO,
 		AUFAB,
 		LINKSRECHTS,
@@ -76,7 +76,7 @@ void TaskUpdate(void *pvParameters);
 void TaskTaskHandler(void *pvParameters);
 void TaskRain(void *pvParameters);
 void TaskRandom(void *pvParameters);
-void TaskPyramid(void *pvParameters);
+void TaskPingPong(void *pvParameters);
 void TaskStrobo(void *pvParameters);
 void TaskAufAb(void *pvParameters);
 void TaskLinksRechts(void *pvParameters);
@@ -232,10 +232,10 @@ void TaskTaskHandler(void *pvParameters)
 				Serial.print("RANDOM\n");
 				break;
 			}
-			case PYRAMID:
+			case PINGPONG:
 			{
-				ptrTaskToRun = &TaskRain;
-				Serial.print("PYRAMID at the moment RAIN\n");
+				ptrTaskToRun = &TaskPingPong;
+				Serial.print("PINGPONG\n");
 				break;
 			}
 			case STROBO:
@@ -252,14 +252,13 @@ void TaskTaskHandler(void *pvParameters)
 			}
 			case LINKSRECHTS:
 			{
-				ptrTaskToRun = &TaskAufAb;
-				Serial.print("LINKSRECHTS at the moment AUFAB\n");
-				// Funktion fehlt noch komplett
+				ptrTaskToRun = &TaskLinksRechts;
+				Serial.print("LINKSRECHTS\n");
 				break;
 			}
 			case SCHLANGE:
 			{
-				ptrTaskToRun = &TaskSchlange; //funktioniert noch nicht
+				ptrTaskToRun = &TaskSchlange;
 				Serial.print("SCHLANGE\n");
 				break;
 			}
@@ -272,7 +271,7 @@ void TaskTaskHandler(void *pvParameters)
 			case MATRIX:
 			{
 				ptrTaskToRun = &TaskMatrix;
-				Serial.print("MATRIX at the moment rain\n");
+				Serial.print("MATRIX\n");
 				//Funktion noch nicht implementiert
 				break;
 			}
@@ -340,8 +339,8 @@ void TaskRandom(void *pvParameters)
 }
 
 /*!
- * \fn	void TaskPyramid(void *pvParameters)
- * \summary	Task-Funktion: TaskPyramid ruft Funktion cube.gegenpyramide() auf.
+ * \fn	void TaskPingPong(void *pvParameters)
+ * \summary	Task-Funktion: TaskPingPong ruft Funktion cube.pingpong() auf.
  * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
  */
 
@@ -350,7 +349,7 @@ void TaskPyramid(void *pvParameters)
 	(void)pvParameters;
 	for (;;)
 	{
-		//cube.gegenpyramide();
+		cube.pingpong();
 	}
 }
 
@@ -395,7 +394,7 @@ void TaskLinksRechts(void *pvParameters)
 	(void)pvParameters;
 	for (;;)
 	{
-		//noch nicht implementiert
+		cube.linksrechts();
 	}
 }
 

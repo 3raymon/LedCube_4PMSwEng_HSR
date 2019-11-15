@@ -129,30 +129,30 @@ public:
 
 
 	/*!
-	 * \fn	void Cube::ebeneNachVorne(struct ledarray* structptr);
+	 * \fn	void Cube::ebeneNachVorne(struct ledarray* struct_ptr);
 	 * \brief	Schiebt gesammten Cube um eine Ebene nach vorne.
 	 * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
 	 */
 
-	void ebeneNachVorne(struct ledarray* structptr);	//Noch nicht implementiert
+	void ebeneNachVorne(struct ledarray* struct_ptr);	//Noch nicht getestet
 
 
 	/*!
-	 * \fn	void Cube::ebeneNachLinks(struct ledarray* structptr);
+	 * \fn	void Cube::ebeneNachLinks(struct ledarray* struct_ptr);
 	 * \brief	Schiebt gesammten Cube um eine Ebene nach links.
 	 * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
 	 */
 
-	void ebeneNachLinks(struct ledarray* structptr);	//Noch nicht implementiert
+	void ebeneNachLinks(struct ledarray* struct_ptr);	//Noch nicht getestet
 
 
 	/*!
-	 * \fn	void Cube::ebeneNachRechts(struct ledarray* structptr);
+	 * \fn	void Cube::ebeneNachRechts(struct ledarray* struct_ptr);
 	 * \brief	Schiebt gesammten Cube um eine Ebene nach rechts.
 	 * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
 	 */
 
-	void ebeneNachRechts(struct ledarray* structptr);	//Noch nicht implementiert
+	void ebeneNachRechts(struct ledarray* struct_ptr);	//Noch nicht getestet
 
 
 	/*!
@@ -164,7 +164,7 @@ public:
 	 * \param 		  	flaeche		  	Auswahl der Fläche
 	 */
 
-	void seitlicheFlaecheOn(struct ledarray* struct_ptr, int flaeche);	//Noch nicht implementiert
+	void seitlicheFlaecheOn(struct ledarray* struct_ptr, int flaeche);	//Noch nicht getestet
 
 
 	/*!
@@ -176,7 +176,7 @@ public:
 	 * \param 		  	flaeche		  	Auswahl der Fläche
 	 */
 
-	void seitlicheFlaecheOff(struct ledarray* struct_ptr, int flaeche);	//Noch nicht implementiert
+	void seitlicheFlaecheOff(struct ledarray* struct_ptr, int flaeche);	//Noch nicht getestet
 
 
 	/*!
@@ -226,7 +226,7 @@ public:
 	 * 			geschoben.
 	 */
 
-	void linksrechts(void);		//Noch nicht implementiert
+	void linksrechts(void);		//Noch nicht getestet
 
 
 	/*!

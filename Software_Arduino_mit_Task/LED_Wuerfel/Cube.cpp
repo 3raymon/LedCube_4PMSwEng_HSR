@@ -258,7 +258,6 @@ void Cube::ebeneOn(ledarray* struct_ptr, int ebene)
 			}
 		}
 	}
-
 }
 
 
@@ -377,38 +376,89 @@ void Cube::ebeneNachHinten(struct ledarray* struct_ptr)
 
 
 /*!
- * \fn	void Cube::ebeneNachVorne(struct ledarray* structptr);
+ * \fn	void Cube::ebeneNachVorne(struct ledarray* struct_ptr);
  * \brief	Schiebt gesammten Cube um eine Ebene nach vorne.
  * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
  */
 
-void Cube::ebeneNachVorne(struct ledarray* structptr)
+void Cube::ebeneNachVorne(struct ledarray* struct_ptr)
 {
+	for (int z = 7; z >= 0; z--)
+	{
+		for (int y = 6; y >= 0; y--)
+		{
+			for (int x = 0; x <= 7; x++)
+			{
+				struct_ptr->a[x][y + 1][z] = struct_ptr->a[x][y][z];
 
+			}
+		}
+	}
+	for (int z = 0; z <= 7; z++)
+	{
+		for (int x = 0; x <= 7; x++)
+		{
+			struct_ptr->a[x][0][z] = { 0 };
+		}
+	}
 }
 
 
 /*!
- * \fn	void Cube::ebeneNachLinks(struct ledarray* structptr);
+ * \fn	void Cube::ebeneNachLinks(struct ledarray* struct_ptr);
  * \brief	Schiebt gesammten Cube um eine Ebene nach links.
  * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
  */
 
-void Cube::ebeneNachLinks(struct ledarray* structptr)
+void Cube::ebeneNachLinks(struct ledarray* struct_ptr)
 {
+	for (int z = 7; z >= 0; z--)
+	{
+		for (int x = 1; x <= 7; x++)
+		{
+			for (int y = 0; y <= 7; y++)
+			{
+				struct_ptr->a[x - 1][y][z] = struct_ptr->a[x][y][z];
 
+			}
+		}
+	}
+	for (int z = 0; z <= 7; z++)
+	{
+		for (int y = 0; y <= 7; y++)
+		{
+			struct_ptr->a[7][y][z] = { 0 };
+		}
+	}
 }
 
 
 /*!
- * \fn	void Cube::ebeneNachRechts(struct ledarray* structptr);
+ * \fn	void Cube::ebeneNachRechts(struct ledarray* struct_ptr);
  * \brief	Schiebt gesammten Cube um eine Ebene nach rechts.
  * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
  */
 
-void Cube::ebeneNachRechts(struct ledarray* structptr)	
+void Cube::ebeneNachRechts(struct ledarray* struct_ptr)	
 {
+	for (int z = 7; z >= 0; z--)
+	{
+		for (int x = 6; x >= 0; x--)
+		{
+			for (int y = 0; y <= 7; y++)
+			{
+				struct_ptr->a[x + 1][y][z] = struct_ptr->a[x][y][z];
 
+			}
+		}
+	}
+	for (int z = 0; z <= 7; z++)
+	{
+		for (int y = 0; y <= 7; y++)
+		{
+			struct_ptr->a[0][y][z] = { 0 };
+		}
+	}
 }
 
 
@@ -423,7 +473,16 @@ void Cube::ebeneNachRechts(struct ledarray* structptr)
 
 void Cube::seitlicheFlaecheOn(struct ledarray* struct_ptr, int flaeche)
 {
-
+	if ((flaeche >= 0) & (flaeche <= 7))
+	{
+		for (int z = 0; z <= 7; z++)
+		{
+			for (int y = 0; y <= 7; y++)
+			{
+				struct_ptr->a[flaeche][y][z] = { 1 };
+			}
+		}
+	}
 }
 
 
@@ -438,7 +497,16 @@ void Cube::seitlicheFlaecheOn(struct ledarray* struct_ptr, int flaeche)
 
 void Cube::seitlicheFlaecheOff(struct ledarray* struct_ptr, int flaeche)
 {
-
+	if ((flaeche >= 0) & (flaeche <= 7))
+	{
+		for (int z = 0; z <= 7; z++)
+		{
+			for (int y = 0; y <= 7; y++)
+			{
+				struct_ptr->a[flaeche][y][z] = { 0 };
+			}
+		}
+	}
 }
 
 
@@ -570,12 +638,12 @@ void Cube::aufab(void)
  * 			geschoben.
  */
 
-void Cube::linksrechts(void)	//Muss noch angepasst werden
+void Cube::linksrechts(void)
 {
 	ledarray linksrechtsarray;
 
-	ebeneOn(&aufabarray, 0);
-	werteUebernehmen(&aufabarray);
+	seitlicheFlaecheOn(&linksrechtsarray, 0);
+	werteUebernehmen(&linksrechtsarray);
 	vTaskDelay(200 / portTICK_PERIOD_MS);
 	int pause = 380;
 
@@ -584,21 +652,21 @@ void Cube::linksrechts(void)	//Muss noch angepasst werden
 		pause = pause - 30;
 		for (int z2 = 1; z2 <= 7; z2++)
 		{
-			ebeneOn(&aufabarray, z2);
+			seitlicheFlaecheOn(&linksrechtsarray, z2);
 			z2--;
-			ebeneOff(&aufabarray, z2);
+			seitlicheFlaecheOff(&linksrechtsarray, z2);
 			z2++;
-			werteUebernehmen(&aufabarray);
+			werteUebernehmen(&linksrechtsarray);
 			vTaskDelay(pause / portTICK_PERIOD_MS);
 		}
 		pause = pause - 30;
 		for (int z3 = 6; z3 >= 0; z3--)
 		{
-			ebeneOn(&aufabarray, z3);
+			seitlicheFlaecheOff(&linksrechtsarray, z3);
 			z3++;
-			ebeneOff(&aufabarray, z3);
+			seitlicheFlaecheOff(&linksrechtsarray, z3);
 			z3--;
-			werteUebernehmen(&aufabarray);
+			werteUebernehmen(&linksrechtsarray);
 			vTaskDelay(pause / portTICK_PERIOD_MS);
 		}
 	}
