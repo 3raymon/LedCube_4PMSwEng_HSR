@@ -1,28 +1,27 @@
 /*
- *	Name:			ledcube_audio.ino
- *	Created:		04.10.2019
- *	Author:			Michael Guntli
- *	Edited:			11.11.2019
- *	Edited by:		Thomas Kuhn
- *	Rev:			1.1
- *	Rev Created		15.11.2019
- */
+	Name:       ledcube_audio.ino
+	Created:	04.10.2019
+	Author:     Michael Guntli
+	Edited:		11.11.2019
+	Edited by:	Thomas Kuhn
+	Rev:		1.0
+*/
 
-
+////////////////////////////////////////////////////
 //Includes
-
+////////////////////////////////////////////////////
 #include "Cube.h"
 #include <Arduino_FreeRTOS.h>
 
-
+////////////////////////////////////////////////////
 //Defines for debugging
-
+////////////////////////////////////////////////////
 //#define DEBUG 1					//Wenn Zeile nicht auskommiert Debugging auf UART
 //#define DEBUGWITHOUTDELAY 1		//Wenn Zeile nicht auskommiert Debugging auf UART
 
-
-/*! \summary	Konstanten & Variablen Deklarationen. */
-
+////////////////////////////////////////////////////
+//Konstanten & Variablen Deklarationen
+////////////////////////////////////////////////////
 const int stackSize = 1000;
 Cube cube;
 int programm = 0;
@@ -30,10 +29,6 @@ int numberofDatabytes = 0;
 int changeFlag = 0;
 int defaultFlag = 0;
 byte Data[17] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
-
-/*!
- * \enum	Fuctions 
- */
 
 enum {
 		RESERVED = 0,
@@ -48,26 +43,15 @@ enum {
 		MATRIX
 	};
 
-/*! \brief	The task communication. */
 TaskHandle_t  TaskCommunication = NULL;
-/*! \brief	The task LED cube update. */
 TaskHandle_t  TaskLedCubeUpdate= NULL;
-/*! \brief	The task handler. */
 TaskHandle_t  TaskHandler = NULL;
-/*! \brief	The task LED cube active. */
 TaskHandle_t  TaskLedCubeActive = NULL;
-
-/*!
- * \fn	void(*ptrTaskToRun)(void *pvParameter);
- * \brief	Constructor.
- * \param [in,out]	pvParameter	If non-null, the pv parameter.
- */
-
 void(*ptrTaskToRun)(void *pvParameter);
 
-
+////////////////////////////////////////////////////
 //Funktionsprototypen
-
+////////////////////////////////////////////////////
 void printData(void);
 
 //Funktionsprototypen fuer Tasks
@@ -84,11 +68,9 @@ void TaskSchlange(void *pvParameters);
 void TaskAudio(void *pvParameters);
 void TaskMatrix(void *pvParameters);
 
-/*!
- * \fn	void setup()
- * \summary	Setup Funktion.
- */
-
+////////////////////////////////////////////////////
+//Setup Funktion
+////////////////////////////////////////////////////
 void setup()
 {
 	cube.initIO();
@@ -106,22 +88,18 @@ void setup()
 	#endif
 }
 
-/*!
- * \fn	void loop()
- * \summary	Start Hauptprogramm.
- */
-
+////////////////////////////////////////////////////
+//Start Hauptprogramm
+////////////////////////////////////////////////////
 void loop()
 {	
 	//es wird alles in den Tasks erledigt
 }
 
-/*!
- * \fn	void printData()
- * \summary	Funktion printData Sobald ein Befehl empfangen wurde wird er mit dieser Funktion
- * 			bestätigt.
- */
-
+///////////////////////////////////////////////////////////////////////////
+//Funktion printData
+//Sobald ein Befehl empfangen wurde wird er mit dieser Funktion bestätigt
+///////////////////////////////////////////////////////////////////////////
 void printData()
 {
 	for (int i = 0; i < numberofDatabytes; i++)
@@ -131,13 +109,10 @@ void printData()
 	}
 }
 
-/*!
- * \fn	void TaskUart(void *pvParameters)
- * \summary	Task-Funktion: TaskUart Verarbeitet Eingaben und setzt Variablen programm und
- * 			changeFlag.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+///////////////////////////////////////////////////////////////////////////
+//Task-Funktion: TaskUart
+//Verarbeitet Eingaben und setzt Variablen programm und changeFlag
+///////////////////////////////////////////////////////////////////////////
 void TaskUart(void *pvParameters)
 {
 	(void)pvParameters;
@@ -159,12 +134,10 @@ void TaskUart(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskUpdate(void *pvParameters)
- * \summary	Task-Funktion: TaskUpdate ruft alle 20ms die Funktion cube.ausgabe() auf.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskUpdate
+//ruft alle 20ms die Funktion cube.ausgabe() auf
+////////////////////////////////////////////////////
 void TaskUpdate(void *pvParameters)
 {
 	(void)pvParameters;
@@ -179,13 +152,10 @@ void TaskUpdate(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskTaskHandler(void *pvParameters)
- * \summary	Task-Funktion: TaskTaskHandler()
- * 			steuert Tasks.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskTaskHandler()
+//steuert Tasks
+////////////////////////////////////////////////////
 void TaskTaskHandler(void *pvParameters)
 {
 	(void)pvParameters;
@@ -234,8 +204,8 @@ void TaskTaskHandler(void *pvParameters)
 			}
 			case PYRAMID:
 			{
-				ptrTaskToRun = &TaskRain;
-				Serial.print("PYRAMID at the moment RAIN\n");
+				ptrTaskToRun = &TaskPyramid;
+				Serial.print("PYRAMID\n");
 				break;
 			}
 			case STROBO:
@@ -252,14 +222,14 @@ void TaskTaskHandler(void *pvParameters)
 			}
 			case LINKSRECHTS:
 			{
-				ptrTaskToRun = &TaskAufAb;
-				Serial.print("LINKSRECHTS at the moment AUFAB\n");
+				ptrTaskToRun = &TaskLinksRechts;
+				Serial.print("LINKSRECHTS\n");
 				// Funktion fehlt noch komplett
 				break;
 			}
 			case SCHLANGE:
 			{
-				ptrTaskToRun = &TaskSchlange; //funktioniert noch nicht
+				ptrTaskToRun = &TaskSchlange;
 				Serial.print("SCHLANGE\n");
 				break;
 			}
@@ -272,7 +242,7 @@ void TaskTaskHandler(void *pvParameters)
 			case MATRIX:
 			{
 				ptrTaskToRun = &TaskMatrix;
-				Serial.print("MATRIX at the moment rain\n");
+				Serial.print("MATRIX\n");
 				//Funktion noch nicht implementiert
 				break;
 			}
@@ -309,12 +279,10 @@ void TaskTaskHandler(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskRain(void *pvParameters)
- * \summary	Task-Funktion: TaskRain ruft Funktion cube.rain() auf.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskRain
+//ruft Funktion cube.rain() auf
+////////////////////////////////////////////////////
 void TaskRain(void *pvParameters)
 {
 	(void)pvParameters;
@@ -324,12 +292,10 @@ void TaskRain(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskRandom(void *pvParameters)
- * \summary	Task-Funktion: TaskRandom ruft Funktion cube.zufall() auf.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskRandom
+//ruft Funktion cube.zufall() auf
+////////////////////////////////////////////////////
 void TaskRandom(void *pvParameters)
 {
 	(void)pvParameters;
@@ -339,27 +305,23 @@ void TaskRandom(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskPyramid(void *pvParameters)
- * \summary	Task-Funktion: TaskPyramid ruft Funktion cube.gegenpyramide() auf.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskPyramid
+//ruft Funktion cube.gegenpyramide() auf
+////////////////////////////////////////////////////
 void TaskPyramid(void *pvParameters)
 {
 	(void)pvParameters;
 	for (;;)
 	{
-		//cube.gegenpyramide();
+		cube.gegenpyramide();
 	}
 }
 
-/*!
- * \fn	void TaskStrobo(void *pvParameters)
- * \summary	Task-Funktion: TaskStrobo ruft Funktion cube.strobo() auf.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskStrobo
+//ruft Funktion cube.strobo() auf
+////////////////////////////////////////////////////
 void TaskStrobo(void *pvParameters)
 {
 	(void)pvParameters;
@@ -369,12 +331,10 @@ void TaskStrobo(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskAufAb(void *pvParameters)
- * \summary	Task-Funktion: TaskAufAb ruft Funktion cube.aufab() auf.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskAufAb
+//ruft Funktion cube.aufab() auf
+////////////////////////////////////////////////////
 void TaskAufAb(void *pvParameters)
 {
 	(void)pvParameters;
@@ -384,12 +344,10 @@ void TaskAufAb(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskLinksRechts(void *pvParameters)
- * \summary	Task-Funktion: TaskLinksRechts ruft noch keine Funktion auf!
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskLinksRechts
+//ruft noch keine Funktion auf!
+////////////////////////////////////////////////////
 void TaskLinksRechts(void *pvParameters)
 {
 	(void)pvParameters;
@@ -399,12 +357,10 @@ void TaskLinksRechts(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskSchlange(void *pvParameters)
- * \summary	Task-Funktion: TaskSchlange ruft Funktion cube.snake() auf.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskSchlange
+//ruft Funktion cube.snake() auf
+////////////////////////////////////////////////////
 void TaskSchlange(void *pvParameters) 
 {
 	(void)pvParameters;
@@ -414,12 +370,10 @@ void TaskSchlange(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskAudio(void *pvParameters)
- * \summary	Task-Funktion: TaskAudio ruft Funktion cube.audioanalyse() auf.
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskAudio
+//ruft Funktion cube.audioanalyse() auf
+////////////////////////////////////////////////////
 void TaskAudio(void *pvParameters)
 {
 	(void)pvParameters;
@@ -429,12 +383,10 @@ void TaskAudio(void *pvParameters)
 	}
 }
 
-/*!
- * \fn	void TaskMatrix(void *pvParameters)
- * \summary	Task-Funktion: TaskMatrix ruft noch keine Funktion auf!
- * \param [in,out]	pvParameters	If non-null, options for controlling the pv.
- */
-
+////////////////////////////////////////////////////
+//Task-Funktion: TaskMatrix
+//ruft noch keine Funktion auf!
+////////////////////////////////////////////////////
 void TaskMatrix(void *pvParameters)
 {
 	(void)pvParameters;
