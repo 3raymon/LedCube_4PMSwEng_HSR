@@ -37,8 +37,6 @@ private slots:
 
     void onReadyRead();
 
-    void bufferCheck();
-
     void updateStatusLabel();
 
     void updateButtons();

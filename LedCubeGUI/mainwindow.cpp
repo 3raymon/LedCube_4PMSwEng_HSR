@@ -17,14 +17,21 @@ MainWindow::MainWindow(QWidget *parent)
     if(serialPortName == nullptr)serialPortName = ui->portSelect->currentText();
     baudRate = ui->baudSelect->currentText().toInt();
 
-    //TEST
+    //Try to open serial port on startup
     if(serialPort.open(QIODevice::ReadWrite)){
         serialPortOpenFlag = true;
     }else{
-        ui->statusLabel->setText("Could not open Port");
+        ui->statusLabel->setText("Could not open Port at Startup");
     }
 
+    /**
+     * @brief Init Timer interrupt, used if serialPort interrupt is not working properly
+     */
     connect(fuseTimer, &QTimer::timeout, this, &MainWindow::onReadyRead);
+
+    /**
+     * @brief Init SerialPort interrupt, used to interrupt as soon data arrived to read on serialPort
+     */
     connect(&serialPort, &QSerialPort::readyRead, this, &MainWindow::onReadyRead);
 
 }
@@ -37,7 +44,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_programm1Button_clicked()
 {
-
     //Clean Buffer before writeing
     for(int i = 0; i < 64; ++i) buffer[i] = 0;
 
@@ -72,12 +78,30 @@ void MainWindow::on_portsReloadButton_clicked()
 
 void MainWindow::on_portSelect_currentTextChanged(const QString &arg1)
 {
+    //Close active port
+    serialPort.close();
+    serialPortOpenFlag = false;
+
+    //Set current Text from portSelect as PortName
     serialPort.setPortName(arg1);
+
+    //open port with new PortName
+    serialPort.open(QSerialPort::ReadWrite);
+
 }
 
 void MainWindow::on_baudSelect_currentTextChanged(const QString &arg1)
 {
+    //Close active port
+    serialPort.close();
+    serialPortOpenFlag = false;
+
     serialPort.setBaudRate(arg1.toInt());
+
+    //open port with new Baudrate
+    serialPort.open(QSerialPort::ReadWrite);
+
+
 }
 
 void MainWindow::onReadyRead()
@@ -88,14 +112,21 @@ void MainWindow::onReadyRead()
     serialResponse = buffer;
 
     for(int i = 0; i < ProgrammUartResponse.size(); ++i){
-        serialResponse == ProgrammUartResponse[i] ? activeProgramm = i : activeProgramm = 0;
+        if(ProgrammUartResponse[i] == serialResponse){
+            activeProgramm = i;
+            break;
+
+        }else{
+            activeProgramm = 0;
+        }
+
     }
 
     std::cout << "activeProgramm:" << activeProgramm << std::endl;
 
     if(activeProgramm){
-        updateStatusLabel();
-        updateButtons();
+        //updateStatusLabel();
+        //updateButtons();
         if(serialPortOpenFlag)serialPort.close();
     }else if(fuseTimerActive){
         fuseTimer->start(1000);
@@ -108,16 +139,35 @@ void MainWindow::onReadyRead()
     }
 }
 
-void MainWindow::bufferCheck()
-{
-    onReadyRead();
-}
-
 void MainWindow::updateStatusLabel()
 {
     switch(activeProgramm){
     case 0:
         ui->statusLabel->setText("No active Programm");
+        break;
+    case 1:
+        ui->statusLabel->setText(ui->programm1Button->text());
+        break;
+    case 2:
+        ui->statusLabel->setText(ui->programm2Button->text());
+        break;
+    case 3:
+        ui->statusLabel->setText(ui->programm3Button->text());
+        break;
+    case 4:
+        ui->statusLabel->setText(ui->programm4Button->text());
+        break;
+    case 5:
+        ui->statusLabel->setText(ui->programm5Button->text());
+        break;
+    case 6:
+        ui->statusLabel->setText(ui->programm6Button->text());
+        break;
+    case 7:
+        ui->statusLabel->setText(ui->programm7Button->text());
+        break;
+    case 8:
+        ui->statusLabel->setText(ui->programm8Button->text());
         break;
     default:
         ui->statusLabel->setText("Running");
@@ -128,7 +178,7 @@ void MainWindow::updateStatusLabel()
 
 void MainWindow::updateButtons()
 {
-    this->setStyleSheet(colInactive);
+    //this->setStyleSheet(colInactive);
     switch(activeProgramm){
     case 1:
         ui->programm1Button->setStyleSheet(colActive);
