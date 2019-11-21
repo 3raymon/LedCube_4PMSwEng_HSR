@@ -5,6 +5,8 @@
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QSerialPortInfo>
+#include <QTimer>
+#include <QPushButton>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -41,6 +43,20 @@ private slots:
 
     void updateButtons();
 
+    void on_programm2Button_clicked();
+
+    void on_programm3Button_clicked();
+
+    void on_programm4Button_clicked();
+
+    void on_programm5Button_clicked();
+
+    void on_programm6Button_clicked();
+
+    void on_programm7Button_clicked();
+
+    void on_programm8Button_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString serialPortName = nullptr;
@@ -75,14 +91,16 @@ private:
     QList<QString> ProgrammUartResponse= {"",
                                           "RAIN\n",
                                           "RANDOM\n",
-                                          "PYRAMID\n",
+                                          "PINGPONG\n",
                                           "STROBO\n",
-                                          "AUF/AB\n",
-                                          "LINKS/RECHTS\n",
+                                          "AUFAB\n",
+                                          "LINKSRECHTS\n",
                                           "SCHLANGE\n",
                                           "AUDIO\n",
                                           "MATRIX\n"
                                           };
+
+    QList<QPushButton*> programmButtons;
 
 };
 #endif // MAINWINDOW_H

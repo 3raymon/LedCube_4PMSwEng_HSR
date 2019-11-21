@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     if(serialPort.open(QIODevice::ReadWrite)){
         serialPortOpenFlag = true;
     }else{
-        ui->statusLabel->setText("Could not open Port at Startup");
+        ui->portStatusLabel->setText("Could not open Port at Startup");
     }
 
     /**
@@ -33,6 +33,22 @@ MainWindow::MainWindow(QWidget *parent)
      * @brief Init SerialPort interrupt, used to interrupt as soon data arrived to read on serialPort
      */
     connect(&serialPort, &QSerialPort::readyRead, this, &MainWindow::onReadyRead);
+
+    /**
+     * @brief List containing programmButtons
+     *
+     * Used for easyer handling with programmButton updates
+     */
+    programmButtons.append(ui->programm1Button);
+    programmButtons.append(ui->programm2Button);
+    programmButtons.append(ui->programm3Button);
+    programmButtons.append(ui->programm4Button);
+    programmButtons.append(ui->programm5Button);
+    programmButtons.append(ui->programm6Button);
+    programmButtons.append(ui->programm7Button);
+    programmButtons.append(ui->programm8Button);
+
+
 
 }
 
@@ -48,7 +64,7 @@ void MainWindow::on_programm1Button_clicked()
     for(int i = 0; i < 64; ++i) buffer[i] = 0;
 
     //Write
-    serialPort.write(ProgrammUartRequests[1]) ? ui->statusLabel->setText("written successfully") : ui->statusLabel->setText("could not write to device");
+    serialPort.write(ProgrammUartRequests[1]);
     serialPort.waitForBytesWritten(100);
 
 
@@ -106,7 +122,8 @@ void MainWindow::on_baudSelect_currentTextChanged(const QString &arg1)
 
 void MainWindow::onReadyRead()
 {
-    serialPort.read(buffer, 64) ? ui->statusLabel->setText("read success") : ui->statusLabel->setText("read fail");
+    int oldActiveProgramm = activeProgramm;
+    serialPort.read(buffer, 64);
     std::cout << "Buffer:" << buffer << std::endl;
 
     serialResponse = buffer;
@@ -114,19 +131,22 @@ void MainWindow::onReadyRead()
     for(int i = 0; i < ProgrammUartResponse.size(); ++i){
         if(ProgrammUartResponse[i] == serialResponse){
             activeProgramm = i;
+
             break;
 
         }else{
             activeProgramm = 0;
         }
-
     }
+    oldActiveProgramm == activeProgramm ? ui->portStatusLabel->setText("read fail, try again!") : ui->portStatusLabel->setText("read success");
 
     std::cout << "activeProgramm:" << activeProgramm << std::endl;
 
+    //Update UI
+    updateStatusLabel();
+    updateButtons();
+
     if(activeProgramm){
-        //updateStatusLabel();
-        //updateButtons();
         if(serialPortOpenFlag)serialPort.close();
     }else if(fuseTimerActive){
         fuseTimer->start(1000);
@@ -134,7 +154,7 @@ void MainWindow::onReadyRead()
     }
 
     if(fuseTimerActive && (fuseTimerIterator > 10)){
-        ui->statusLabel->setText("read timeout");
+        ui->portStatusLabel->setText("read timeout");
         fuseTimer->stop();
     }
 }
@@ -143,34 +163,34 @@ void MainWindow::updateStatusLabel()
 {
     switch(activeProgramm){
     case 0:
-        ui->statusLabel->setText("No active Programm");
+        ui->programmStatusLabel->setText("No active Programm");
         break;
     case 1:
-        ui->statusLabel->setText(ui->programm1Button->text());
+        ui->programmStatusLabel->setText(ui->programm1Button->text());
         break;
     case 2:
-        ui->statusLabel->setText(ui->programm2Button->text());
+        ui->programmStatusLabel->setText(ui->programm2Button->text());
         break;
     case 3:
-        ui->statusLabel->setText(ui->programm3Button->text());
+        ui->programmStatusLabel->setText(ui->programm3Button->text());
         break;
     case 4:
-        ui->statusLabel->setText(ui->programm4Button->text());
+        ui->programmStatusLabel->setText(ui->programm4Button->text());
         break;
     case 5:
-        ui->statusLabel->setText(ui->programm5Button->text());
+        ui->programmStatusLabel->setText(ui->programm5Button->text());
         break;
     case 6:
-        ui->statusLabel->setText(ui->programm6Button->text());
+        ui->programmStatusLabel->setText(ui->programm6Button->text());
         break;
     case 7:
-        ui->statusLabel->setText(ui->programm7Button->text());
+        ui->programmStatusLabel->setText(ui->programm7Button->text());
         break;
     case 8:
-        ui->statusLabel->setText(ui->programm8Button->text());
+        ui->programmStatusLabel->setText(ui->programm8Button->text());
         break;
     default:
-        ui->statusLabel->setText("Running");
+        ui->programmStatusLabel->setText("Running");
         break;
     }
 }
@@ -178,8 +198,11 @@ void MainWindow::updateStatusLabel()
 
 void MainWindow::updateButtons()
 {
-    //this->setStyleSheet(colInactive);
-    switch(activeProgramm){
+    for(QPushButton* elem: programmButtons){
+        elem->setStyleSheet(colInactive);
+    }
+
+    switch(activeProgramm){ 
     case 1:
         ui->programm1Button->setStyleSheet(colActive);
         break;
@@ -210,3 +233,73 @@ void MainWindow::updateButtons()
 }
 
 
+
+void MainWindow::on_programm2Button_clicked()
+{
+    //Clean Buffer before writeing
+    for(int i = 0; i < 64; ++i) buffer[i] = 0;
+
+    //Write
+    serialPort.write(ProgrammUartRequests[2]) ? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
+    serialPort.waitForBytesWritten(100);
+}
+
+void MainWindow::on_programm3Button_clicked()
+{
+    //Clean Buffer before writeing
+    for(int i = 0; i < 64; ++i) buffer[i] = 0;
+
+    //Write
+    serialPort.write(ProgrammUartRequests[3]) ? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
+    serialPort.waitForBytesWritten(100);
+}
+
+void MainWindow::on_programm4Button_clicked()
+{
+    //Clean Buffer before writeing
+    for(int i = 0; i < 64; ++i) buffer[i] = 0;
+
+    //Write
+    serialPort.write(ProgrammUartRequests[4]) ? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
+    serialPort.waitForBytesWritten(100);
+}
+
+void MainWindow::on_programm5Button_clicked()
+{
+    //Clean Buffer before writeing
+    for(int i = 0; i < 64; ++i) buffer[i] = 0;
+
+    //Write
+    serialPort.write(ProgrammUartRequests[5]) ? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
+    serialPort.waitForBytesWritten(100);
+}
+
+void MainWindow::on_programm6Button_clicked()
+{
+    //Clean Buffer before writeing
+    for(int i = 0; i < 64; ++i) buffer[i] = 0;
+
+    //Write
+    serialPort.write(ProgrammUartRequests[6]) ? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
+    serialPort.waitForBytesWritten(100);
+}
+
+void MainWindow::on_programm7Button_clicked()
+{
+    //Clean Buffer before writeing
+    for(int i = 0; i < 64; ++i) buffer[i] = 0;
+
+    //Write
+    serialPort.write(ProgrammUartRequests[7]) ? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
+    serialPort.waitForBytesWritten(100);
+}
+
+void MainWindow::on_programm8Button_clicked()
+{
+    //Clean Buffer before writeing
+    for(int i = 0; i < 64; ++i) buffer[i] = 0;
+
+    //Write
+    serialPort.write(ProgrammUartRequests[8]) ? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
+    serialPort.waitForBytesWritten(100);
+}

@@ -97,7 +97,7 @@
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>Pyramid</string>
+        <string>Pingpong</string>
        </property>
       </widget>
      </item>
@@ -267,7 +267,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="statusLabel">
+        <widget class="QLabel" name="programmStatusLabel">
+         <property name="text">
+          <string>*Inacive*</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="portStatusLabel">
          <property name="text">
           <string>*Inacive*</string>
          </property>
