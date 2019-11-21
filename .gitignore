@@ -29,3 +29,5 @@
 *.out
 *.app
 Software_Arduino_mit_Task/LED_Wuerfel/__vm/
+Software_Arduino_mit_Task/LED_Wuerfel/.vs/
+Software_Arduino_mit_Task/LED_Wuerfel/Release/
