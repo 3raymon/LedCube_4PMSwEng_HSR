@@ -1,9 +1,10 @@
 /*!
- *	Name:			Cube.h
- *	Created:		04.10.2019
- *	Author :		Michael Guntli
- *	Rev :			1.1
- *	Rev Created		15.11.2019
+ *	\file			Cube.h
+ *	\date			erstellt: 04.10.2019
+ *	\author			Michael Guntli
+ *	\version		1.1
+ *	\date			berarbeitet: 15.11.2019
+ *	\brief			Headerfile mit saemtlichen Funktionen fuer die Steuerung des LED-Cube
  */
 
 #ifndef _CUBE_h
@@ -17,7 +18,7 @@
 
 /*!
  * \class	Cube
- * \brief	Sämtliche Funktionen für die Steuerung des Led Cube
+ * \brief	Saemtliche Funktionen fuer die Steuerung des LED-Cube
  */
 
 class Cube
@@ -26,7 +27,7 @@ public:
 
 	/*!
 	 * \struct	ledarray
-	 * \brief	Grundarray um Werte für die Ausgabe zu bestimmen
+	 * \brief	Grundarray um Werte fuer die Ausgabe zu bestimmen
 	 */
 
 	struct ledarray	
@@ -37,7 +38,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::initIO(void);
-	 * \summary	Initialisierung der IOs 
+	 * \brief	Initialisierung der IOs 
 	 */
 
 	void initIO(void);	
@@ -54,7 +55,7 @@ public:
 	/*!
 	 * \fn	void Cube::werteUebernehmen(struct ledarray* struct_ptr);
 	 * \brief	Werte werden in das Ausgabe Array kopiert und somit 
-	 * 			bei der nächsten Ausgabe auf dem Cube dargestellt.
+	 * 			bei der naechsten Ausgabe auf dem Cube dargestellt.
 	 * \param [in,out]	struct_ptr Pointer auf zu bearbeitendes Array
 	 */
 
@@ -63,7 +64,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::einschalten(void);
-	 * \brief	Einschalten des gesammten Würfels
+	 * \brief	Einschalten des gesamten Wuerfels
 	 */
 
 	void einschalten(void);
@@ -71,7 +72,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::ausschalten(void);
-	 * \brief	Ausschalten des gesammten Würfels
+	 * \brief	Ausschalten des gesamten Wuerfels
 	 */
 
 	void ausschalten(void);
@@ -80,7 +81,7 @@ public:
 	/*!
 	 * \fn	void Cube::ebeneOn(struct ledarray* struct_ptr, int i);
 	 * \brief	Einzelne Ebene kann eingestellt werden, mit der int 
-	 * 			Variable wird die Ebene gewählt 0 bis 7 
+	 * 			Variable wird die Ebene gewaehlt 0 bis 7 
 	 * 			0 bedeutet unterster Layer 7 oberster
 	 * \param [in,out]	struct_ptr	Pointer auf zu bearbeitendes Array
 	 * \param 		  	ebene		  	Auswahl der Ebene
@@ -92,7 +93,7 @@ public:
 	/*!
 	 * \fn	void Cube::ebeneOff(struct ledarray* struct_ptr, int i);
 	 * \brief	Einzelne Ebene kann ausgeschaltet werden, mit der int 
-	 * 			Variable wird die Ebene gewählt 0 bis 7 
+	 * 			Variable wird die Ebene gewaehlt 0 bis 7 
 	 * 			0 bedeutet unterster Layer 7 oberster	
 	 * \param [in,out]	struct_ptr	Pointer auf zu bearbeitendes Array
 	 * \param 		  	ebene		  	Auswahl der Ebene
@@ -103,7 +104,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::ebeneNachUnten(struct ledarray* struct_ptr);
-	 * \brief	Schiebt gesammten Cube um eine Ebene nach unten
+	 * \brief	Schiebt gesamten Cube um eine Ebene nach unten
 	 * \param [in,out]	struct_ptr	Pointer auf zu bearbeitendes Array
 	 */
 
@@ -112,7 +113,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::ebeneNachOben(struct ledarray* struct_ptr);
-	 * \brief	Schiebt gesammten Cube um eine Ebene nach oben.
+	 * \brief	Schiebt gesamten Cube um eine Ebene nach oben.
 	 * \param [in,out]	struct_ptr	Pointer auf zu bearbeitendes Array
 	 */
 
@@ -121,7 +122,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::ebeneNachHinten(struct ledarray* struct_ptr);
-	 * \brief	Schiebt gesammten Cube um eine Ebene nach hinten.
+	 * \brief	Schiebt gesamten Cube um eine Ebene nach hinten.
 	 * \param [in,out]	struct_ptr	Pointer auf zu bearbeitendes Array
 	 */
 
@@ -130,7 +131,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::ebeneNachVorne(struct ledarray* struct_ptr);
-	 * \brief	Schiebt gesammten Cube um eine Ebene nach vorne.
+	 * \brief	Schiebt gesamten Cube um eine Ebene nach vorne.
 	 * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
 	 */
 
@@ -139,7 +140,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::ebeneNachLinks(struct ledarray* struct_ptr);
-	 * \brief	Schiebt gesammten Cube um eine Ebene nach links.
+	 * \brief	Schiebt gesamten Cube um eine Ebene nach links.
 	 * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
 	 */
 
@@ -148,7 +149,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::ebeneNachRechts(struct ledarray* struct_ptr);
-	 * \brief	Schiebt gesammten Cube um eine Ebene nach rechts.
+	 * \brief	Schiebt gesamten Cube um eine Ebene nach rechts.
 	 * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
 	 */
 
@@ -157,11 +158,11 @@ public:
 
 	/*!
 	 * \fn	void Cube::seitlicheFlaecheOn(struct ledarray* struct_ptr, int i);
-	 * \brief	Einzelne Fläche(von vorne nach hinten) kann eingeschaltet werden, 
-	 * 			mit der int	Variable wird die Fläche gewählt 0 bis 7 
-	 * 			0 bedeutet ganz linke Fläche, 7 ganz rechts
+	 * \brief	Einzelne Flaeche(von vorne nach hinten) kann eingeschaltet werden, 
+	 * 			mit der int	Variable wird die Flaeche gewaehlt 0 bis 7 
+	 * 			0 bedeutet ganz linke Flaeche, 7 ganz rechts
 	 * \param [in,out]	struct_ptr	Pointer auf zu berarbeitendes Array
-	 * \param 		  	flaeche		  	Auswahl der Fläche
+	 * \param 		  	flaeche		  	Auswahl der Flaeche
 	 */
 
 	void seitlicheFlaecheOn(struct ledarray* struct_ptr, int flaeche);	//Noch nicht getestet
@@ -169,11 +170,11 @@ public:
 
 	/*!
 	 * \fn	void Cube::seitlicheFlaecheOff(struct ledarray* struct_ptr, int i);
-	 * \brief	Einzelne Fläche(von vorne nach hinten) kann ausgeschaltet werden, 
-	 * 			mit der int	Variable wird die Fläche gewählt 0 bis 7 
-	 * 			0 bedeutet ganz linke Fläche, 7 ganz rechts
+	 * \brief	Einzelne Flaeche(von vorne nach hinten) kann ausgeschaltet werden, 
+	 * 			mit der int	Variable wird die Flaeche gewaehlt 0 bis 7 
+	 * 			0 bedeutet ganz linke Flaeche, 7 ganz rechts
 	 * \param [in,out]	struct_ptr	Pointer auf zu bearbeitendes Array
-	 * \param 		  	flaeche		  	Auswahl der Fläche
+	 * \param 		  	flaeche		  	Auswahl der Flaeche
 	 */
 
 	void seitlicheFlaecheOff(struct ledarray* struct_ptr, int flaeche);	//Noch nicht getestet
@@ -189,7 +190,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::zufall(void);
-	 * \brief	Zufälliges ein und ausschalten von Leds
+	 * \brief	Zufaelliges ein und ausschalten von Leds
 	 */
 
 	void zufall(void);
@@ -206,7 +207,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::strobo(void);
-	 * \brief	Strobo mit sämtlichen Leds
+	 * \brief	Strobo mit saemtlichen Leds
 	 */
 
 	void strobo(void);
@@ -222,7 +223,7 @@ public:
 
 	/*!
 	 * \fn	void Cube::linksrechts(void);
-	 * \brief	Fläche wird erstellt und dann von links nach rechts 
+	 * \brief	Flaeche wird erstellt und dann von links nach rechts 
 	 * 			geschoben.
 	 */
 
@@ -231,8 +232,8 @@ public:
 
 	/*!
 	 * \fn	void Cube::pingpong(void);
-	 * \brief	Auf oberster und unterster Fläche werden zufällig 
-	 * 			Leds eingeschaltet  bis auf beiden Flächen 32 Leds 
+	 * \brief	Auf oberster und unterster Flaeche werden zufaellig 
+	 * 			Leds eingeschaltet  bis auf beiden Flaechen 32 Leds 
 	 * 			leuchten. Dann wird jeweils ein Led von der unteren 
 	 * 			Ebene auf die obere Ebene geschoben und umgekehrt.
 	 */
@@ -243,7 +244,7 @@ public:
 	/*!
 	 * \fn	void Cube::snake(void);
 	 * \brief	Schlange die sich von oben nach unten bewegt
-	 * 			mit zufälligen Richtungswechseln
+	 * 			mit zufaelligen Richtungswechseln
 	 */
 
 	void snake(void);			//Noch nicht getestet
@@ -251,8 +252,8 @@ public:
 
 	/*!
 	 * \fn	void Cube::audioanalyse(void);
-	 * \brief	Analysiert die 8 Audiokanäle und gibt diese dann 
-	 * 			auf den Würfel aus
+	 * \brief	Analysiert die 8 Audiokanaele und gibt diese dann 
+	 * 			auf den Wuerfel aus
 	 */
 
 	void audioanalyse(void);	
@@ -260,16 +261,16 @@ public:
 
 	/*!
 	 * \fn	int Cube::analogUmrechnung(int value);
-	 * \brief	Analogwerte werden umgerechnet und die Intensität
-	 * 			wird zurück gegeben. Intensität zwischen 1 und 8
+	 * \brief	Analogwerte werden umgerechnet und die Intensitaet
+	 * 			wird zurueck gegeben. Intensitaet zwischen 1 und 8
 	 * \param	value	Analogwert des Eingangs
-	 * \returns	An int.	Intensitätsstufe des Signals
+	 * \returns	An int.	Intensitaetsstufe des Signals
 	 */
 
 	int analogUmrechnung(int value);
 
 private:
-	/*! \brief	Ausgabewerte für jeweils 8 Leds. */
+	/*! \brief	Ausgabewerte fuer jeweils 8 Leds. */
 	int L1 = 22;
 	int L2 = 23;
 	int L3 = 24;
@@ -299,7 +300,7 @@ private:
 	int Ebene7 = 44;
 	int Ebene8 = 45;
 
-	/*! \summary	Schaltet die Latches frei für Ausgabe. */
+	/*! \summary	Schaltet die Latches frei fuer Ausgabe. */
 	int ENABLE = 46;
 
 	/*! \summary	Schalter zur Funktionsauswahl. */
@@ -308,12 +309,12 @@ private:
 	int Schalter3 = 49;
 	int Schalter4 = 50;
 
-	/*! \summary	Status Leds zur Anzeige welcher Modus gewählt ist. */
+	/*! \summary	Status Leds zur Anzeige welcher Modus gewaehlt ist. */
 	int Status1 = 51;
 	int Status2 = 52;
 	int Status3 = 53;
 
-	/*! \summary	Analogeingänge für die Bandpassfilter. */
+	/*! \summary	Analogeingaenge fuer die Bandpassfilter. */
 	int analogPin_0 = A0;
 	int analogPin_1 = A1;
 	int analogPin_2 = A2;
@@ -323,7 +324,7 @@ private:
 	int analogPin_6 = A6;
 	int analogPin_7 = A7;
 
-	/*! \summary	Array das zur ständigen Ausgabe verwendet wird */
+	/*! \summary	Array das zur staendigen Ausgabe verwendet wird */
 	char ledaktvalue[8][8][8] = { {{0}} };
 };
 
