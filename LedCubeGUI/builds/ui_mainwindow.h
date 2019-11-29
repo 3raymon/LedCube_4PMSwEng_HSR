@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.13.1
+** Created by: Qt User Interface Compiler version 5.12.6
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -61,12 +61,15 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(696, 688);
+        MainWindow->resize(695, 632);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
+        MainWindow->setMinimumSize(QSize(695, 632));
+        MainWindow->setMaximumSize(QSize(695, 632));
+        MainWindow->setBaseSize(QSize(694, 632));
         MainWindow->setAnimated(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
@@ -74,16 +77,23 @@ public:
         frame = new QFrame(centralwidget);
         frame->setObjectName(QString::fromUtf8("frame"));
         frame->setGeometry(QRect(30, 120, 641, 521));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());
+        frame->setSizePolicy(sizePolicy1);
+        frame->setCursor(QCursor(Qt::ForbiddenCursor));
+        frame->setLayoutDirection(Qt::LeftToRight);
         gridLayout = new QGridLayout(frame);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(1, -1, 1, 1);
         programm1Button = new QPushButton(frame);
         programm1Button->setObjectName(QString::fromUtf8("programm1Button"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(programm1Button->sizePolicy().hasHeightForWidth());
-        programm1Button->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(programm1Button->sizePolicy().hasHeightForWidth());
+        programm1Button->setSizePolicy(sizePolicy2);
         programm1Button->setStyleSheet(QString::fromUtf8(""));
 
         gridLayout->addWidget(programm1Button, 0, 0, 1, 1);
@@ -193,11 +203,11 @@ public:
         statusGroup->setObjectName(QString::fromUtf8("statusGroup"));
         showStatusLabel = new QLabel(groupBox);
         showStatusLabel->setObjectName(QString::fromUtf8("showStatusLabel"));
-        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Maximum);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(showStatusLabel->sizePolicy().hasHeightForWidth());
-        showStatusLabel->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Maximum);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(showStatusLabel->sizePolicy().hasHeightForWidth());
+        showStatusLabel->setSizePolicy(sizePolicy3);
 
         statusGroup->addWidget(showStatusLabel);
 
@@ -217,7 +227,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 696, 21));
+        menubar->setGeometry(QRect(0, 0, 695, 21));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -230,37 +240,37 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "LedCube Control Center", nullptr));
-        programm1Button->setText(QCoreApplication::translate("MainWindow", "Rain", nullptr));
-        programm5Button->setText(QCoreApplication::translate("MainWindow", "Auf/Ab", nullptr));
-        programm2Button->setText(QCoreApplication::translate("MainWindow", "Random", nullptr));
-        programm6Button->setText(QCoreApplication::translate("MainWindow", "Links/Rechts", nullptr));
-        programm3Button->setText(QCoreApplication::translate("MainWindow", "Pingpong", nullptr));
-        programm7Button->setText(QCoreApplication::translate("MainWindow", "Schlange", nullptr));
-        programm4Button->setText(QCoreApplication::translate("MainWindow", "Strobo", nullptr));
-        programm8Button->setText(QCoreApplication::translate("MainWindow", "Audio", nullptr));
-        portsReloadButton->setText(QCoreApplication::translate("MainWindow", "Ports Reload", nullptr));
-        portLabel->setText(QCoreApplication::translate("MainWindow", "Port:", nullptr));
-#if QT_CONFIG(accessibility)
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "LedCube Control Center", nullptr));
+        programm1Button->setText(QApplication::translate("MainWindow", "Rain", nullptr));
+        programm5Button->setText(QApplication::translate("MainWindow", "Auf/Ab", nullptr));
+        programm2Button->setText(QApplication::translate("MainWindow", "Random", nullptr));
+        programm6Button->setText(QApplication::translate("MainWindow", "Links/Rechts", nullptr));
+        programm3Button->setText(QApplication::translate("MainWindow", "Pingpong", nullptr));
+        programm7Button->setText(QApplication::translate("MainWindow", "Schlange", nullptr));
+        programm4Button->setText(QApplication::translate("MainWindow", "Strobo", nullptr));
+        programm8Button->setText(QApplication::translate("MainWindow", "Audio", nullptr));
+        portsReloadButton->setText(QApplication::translate("MainWindow", "Ports Reload", nullptr));
+        portLabel->setText(QApplication::translate("MainWindow", "Port:", nullptr));
+#ifndef QT_NO_ACCESSIBILITY
         portSelect->setAccessibleName(QString());
-#endif // QT_CONFIG(accessibility)
-        portSelect->setCurrentText(QCoreApplication::translate("MainWindow", "Port", nullptr));
-        baudrateLabel->setText(QCoreApplication::translate("MainWindow", "Baudrate:", nullptr));
-        baudSelect->setItemText(0, QCoreApplication::translate("MainWindow", "1200", nullptr));
-        baudSelect->setItemText(1, QCoreApplication::translate("MainWindow", "2400", nullptr));
-        baudSelect->setItemText(2, QCoreApplication::translate("MainWindow", "4800", nullptr));
-        baudSelect->setItemText(3, QCoreApplication::translate("MainWindow", "9600", nullptr));
-        baudSelect->setItemText(4, QCoreApplication::translate("MainWindow", "19200", nullptr));
-        baudSelect->setItemText(5, QCoreApplication::translate("MainWindow", "38400", nullptr));
-        baudSelect->setItemText(6, QCoreApplication::translate("MainWindow", "57600", nullptr));
-        baudSelect->setItemText(7, QCoreApplication::translate("MainWindow", "115200", nullptr));
+#endif // QT_NO_ACCESSIBILITY
+        portSelect->setCurrentText(QApplication::translate("MainWindow", "Port", nullptr));
+        baudrateLabel->setText(QApplication::translate("MainWindow", "Baudrate:", nullptr));
+        baudSelect->setItemText(0, QApplication::translate("MainWindow", "1200", nullptr));
+        baudSelect->setItemText(1, QApplication::translate("MainWindow", "2400", nullptr));
+        baudSelect->setItemText(2, QApplication::translate("MainWindow", "4800", nullptr));
+        baudSelect->setItemText(3, QApplication::translate("MainWindow", "9600", nullptr));
+        baudSelect->setItemText(4, QApplication::translate("MainWindow", "19200", nullptr));
+        baudSelect->setItemText(5, QApplication::translate("MainWindow", "38400", nullptr));
+        baudSelect->setItemText(6, QApplication::translate("MainWindow", "57600", nullptr));
+        baudSelect->setItemText(7, QApplication::translate("MainWindow", "115200", nullptr));
 
-#if QT_CONFIG(accessibility)
+#ifndef QT_NO_ACCESSIBILITY
         baudSelect->setAccessibleName(QString());
-#endif // QT_CONFIG(accessibility)
-        showStatusLabel->setText(QCoreApplication::translate("MainWindow", "Status:", nullptr));
-        programmStatusLabel->setText(QCoreApplication::translate("MainWindow", "*Inacive*", nullptr));
-        portStatusLabel->setText(QCoreApplication::translate("MainWindow", "*Inacive*", nullptr));
+#endif // QT_NO_ACCESSIBILITY
+        showStatusLabel->setText(QApplication::translate("MainWindow", "Status:", nullptr));
+        programmStatusLabel->setText(QApplication::translate("MainWindow", "*Inacive*", nullptr));
+        portStatusLabel->setText(QApplication::translate("MainWindow", "*Inacive*", nullptr));
     } // retranslateUi
 
 };
