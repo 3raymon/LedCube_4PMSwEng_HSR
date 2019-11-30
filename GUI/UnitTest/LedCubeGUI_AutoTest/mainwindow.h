@@ -1,7 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "serialportwriter.h"
 #include <QMainWindow>
 #include <QSerialPort>
 #include <QSerialPortInfo>
@@ -17,6 +16,8 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+    Ui::MainWindow *ui; //Moved from private, because of AutoTest
+    char buffer[64] = {0}; //Moved from private because of AutoTest
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -29,8 +30,6 @@ private slots:
      * 2. Via serialPort programmcoe "01" is sent
      *
      */
-    void on_programm1Button_clicked();
-
     void on_portsReloadButton_clicked();
 
     void on_portSelect_currentTextChanged(const QString &arg1);
@@ -42,6 +41,8 @@ private slots:
     void updateStatusLabel();
 
     void updateButtons();
+
+    void on_programm1Button_clicked();
 
     void on_programm2Button_clicked();
 
@@ -58,11 +59,11 @@ private slots:
     void on_programm8Button_clicked();
 
 private:
-    Ui::MainWindow *ui;
+//    Ui::MainWindow *ui; //Moved to Pubilc because of AutoTest
     QString serialPortName = nullptr;
     qint32 baudRate;
     QSerialPort serialPort;
-    char buffer[64] = {0};
+//    char buffer[64] = {0}; //Moved to Pubilc because of AutoTest
     QString serialResponse;
     int activeProgramm = 0;
     bool serialPortOpenFlag = false;

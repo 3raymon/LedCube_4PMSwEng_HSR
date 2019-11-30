@@ -57,23 +57,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::on_programm1Button_clicked()
-{
-    //Clean Buffer before writeing
-    for(int i = 0; i < 64; ++i) buffer[i] = 0;
-
-    //Write
-    serialPort.write(ProgrammUartRequests[1]);
-    serialPort.waitForBytesWritten(100);
-
-
-    //Read
-    if(fuseTimerActive)fuseTimer->start(1000);
-    //if(serialPort.waitForReadyRead(10000))onReadyRead();
-
-}
-
 void MainWindow::on_portsReloadButton_clicked()
 {
     const auto portsInfos = QSerialPortInfo::availablePorts();
@@ -232,7 +215,21 @@ void MainWindow::updateButtons()
     }
 }
 
+void MainWindow::on_programm1Button_clicked()
+{
+    //Clean Buffer before writeing
+    for(int i = 0; i < 64; ++i) buffer[i] = 0;
 
+    //Write
+    serialPort.write(ProgrammUartRequests[1])? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
+    serialPort.waitForBytesWritten(100);
+
+
+    //Read
+    if(fuseTimerActive)fuseTimer->start(1000);
+    //if(serialPort.waitForReadyRead(10000))onReadyRead();
+
+}
 
 void MainWindow::on_programm2Button_clicked()
 {
