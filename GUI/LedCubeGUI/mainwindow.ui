@@ -60,7 +60,7 @@
      </sizepolicy>
     </property>
     <property name="cursor">
-     <cursorShape>ForbiddenCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
