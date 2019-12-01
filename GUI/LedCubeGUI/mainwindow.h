@@ -37,6 +37,8 @@ private slots:
 
     void onReadyRead();
 
+    void ReadUart();
+
     void updateStatusLabel();
 
     void updateButtons();

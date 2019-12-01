@@ -18,8 +18,11 @@ MainWindow::MainWindow(QWidget *parent)
     baudRate = ui->baudSelect->currentText().toInt();
 
     //Try to open serial port on startup
-    if(serialPort.open(QIODevice::ReadWrite)){
-        serialPortOpenFlag = true;
+    serialPort.setPortName(serialPortName);
+    serialPort.setBaudRate(baudRate);
+    serialPort.open(QSerialPort::ReadWrite);
+    if(serialPort.isOpen()){
+        ui->portStatusLabel->setText("open Port at Startup");
     }else{
         ui->portStatusLabel->setText("Could not open Port at Startup");
     }
@@ -87,6 +90,10 @@ void MainWindow::on_portSelect_currentTextChanged(const QString &arg1)
     //open port with new PortName
     serialPort.open(QSerialPort::ReadWrite);
 
+    if(serialPort.isOpen()){
+        ui->portStatusLabel->setText("open selected Port");
+    }
+
 }
 
 void MainWindow::on_baudSelect_currentTextChanged(const QString &arg1)
@@ -100,12 +107,18 @@ void MainWindow::on_baudSelect_currentTextChanged(const QString &arg1)
     //open port with new Baudrate
     serialPort.open(QSerialPort::ReadWrite);
 
-
+    if(serialPort.isOpen()){
+        ui->portStatusLabel->setText("open Port with new baudrate");
+    }
 }
 
 void MainWindow::onReadyRead()
 {
-    int oldActiveProgramm = activeProgramm;
+    QTimer::singleShot(50,this,SLOT(ReadUart()));
+}
+
+void MainWindow::ReadUart()
+{
     serialPort.read(buffer, 64);
     std::cout << "Buffer:" << buffer << std::endl;
 
@@ -121,7 +134,7 @@ void MainWindow::onReadyRead()
             activeProgramm = 0;
         }
     }
-    oldActiveProgramm == activeProgramm ? ui->portStatusLabel->setText("read fail, try again!") : ui->portStatusLabel->setText("read success");
+    0 == activeProgramm ? ui->portStatusLabel->setText("read fail, try again!") : ui->portStatusLabel->setText("read success");
 
     std::cout << "activeProgramm:" << activeProgramm << std::endl;
 
@@ -129,16 +142,8 @@ void MainWindow::onReadyRead()
     updateStatusLabel();
     updateButtons();
 
-    if(activeProgramm){
+   if(activeProgramm){
         if(serialPortOpenFlag)serialPort.close();
-    }else if(fuseTimerActive){
-        fuseTimer->start(1000);
-        ++fuseTimerIterator;
-    }
-
-    if(fuseTimerActive && (fuseTimerIterator > 10)){
-        ui->portStatusLabel->setText("read timeout");
-        fuseTimer->stop();
     }
 }
 
@@ -177,7 +182,6 @@ void MainWindow::updateStatusLabel()
         break;
     }
 }
-
 
 void MainWindow::updateButtons()
 {
@@ -223,12 +227,6 @@ void MainWindow::on_programm1Button_clicked()
     //Write
     serialPort.write(ProgrammUartRequests[1])? ui->portStatusLabel->setText("written successfully") : ui->portStatusLabel->setText("could not write to device, Try again");
     serialPort.waitForBytesWritten(100);
-
-
-    //Read
-    if(fuseTimerActive)fuseTimer->start(1000);
-    //if(serialPort.waitForReadyRead(10000))onReadyRead();
-
 }
 
 void MainWindow::on_programm2Button_clicked()
