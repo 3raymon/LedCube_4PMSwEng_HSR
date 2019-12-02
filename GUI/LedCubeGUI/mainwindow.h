@@ -69,12 +69,6 @@ private:
     int activeProgramm = 0;
     bool serialPortOpenFlag = false;
 
-    //Fusetimer
-    QTimer *fuseTimer = new QTimer(this);
-    bool fuseTimerActive = false;
-
-    int fuseTimerIterator = 0;
-
     QString colActive = QString("background-color: green");
     QString colInactive = QString("background-color: 0");
 

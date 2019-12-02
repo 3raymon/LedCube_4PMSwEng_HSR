@@ -28,11 +28,6 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     /**
-     * @brief Init Timer interrupt, used if serialPort interrupt is not working properly
-     */
-    connect(fuseTimer, &QTimer::timeout, this, &MainWindow::onReadyRead);
-
-    /**
      * @brief Init SerialPort interrupt, used to interrupt as soon data arrived to read on serialPort
      */
     connect(&serialPort, &QSerialPort::readyRead, this, &MainWindow::onReadyRead);
