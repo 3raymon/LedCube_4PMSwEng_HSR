@@ -1,4 +1,7 @@
-# LEDCube
+# LEDCube 
+****NEWS****
+This is now an open repository, please do not use the old anymore.
+
 A GUI for an Arduino LED Cube
 
 Release3 is out, build with Qt12.6 -> Timer Interrupt before read implemented
