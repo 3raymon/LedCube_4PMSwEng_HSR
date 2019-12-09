@@ -1,3 +1,10 @@
+/*
+ *	\file			main.cpp
+ *	\date			04.10.2019
+ *	\author			Ramon Carlucci
+ *	\version		3.0
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QApplication>
@@ -5,25 +12,13 @@
 
 /*
  * DOXYGEN HELP
-@brief - kurze Beschreibung des folgenden Codes
-@param abc - Beschreibung des Parameters abc einer Funktion
-@return - Beschreibung des Rückgabewertes einer Funktion
-@class abc - Beschreibung der Klasse abc
-@file abc.de - Beschreibung der Datei abc.de
+	/brief - kurze Beschreibung des folgenden Codes
+	/param abc - Beschreibung des Parameters abc einer Funktion
+	/return - Beschreibung des Rückgabewertes einer Funktion
+	/class abc - Beschreibung der Klasse abc
+	/file abc.de - Beschreibung der Datei abc.de
 */
 
-
-/**
- * @brief get informations about attached serial port devices, its used only for debuggin.
- *
- * Function will write fallowing informations to cout
- * - port name
- * - desciption
- * - serial number
- * - system location
- * - vendor identifier
- * - product identifier
- */
 void getSerialPortInfos();
 
 int main(int argc, char *argv[])

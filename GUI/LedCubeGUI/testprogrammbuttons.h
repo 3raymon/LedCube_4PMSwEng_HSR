@@ -1,3 +1,10 @@
+/*!
+ *	\file			testprogrammbuttons.h
+ *	\date			03.11.2019
+ *	\author			Ramon Carlucci
+ *	\version		3.0
+ */
+
 #ifndef TESTPROGRAMM1_H
 #define TESTPROGRAMM1_H
 
@@ -7,9 +14,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+ /*!
+		\brief class for testing function of the GUI-buttons
+*/
 class TestProgrammButtons : public QObject
 {
     Q_OBJECT
+
 public:
     explicit TestProgrammButtons(QObject *parent = nullptr);
     ~TestProgrammButtons();

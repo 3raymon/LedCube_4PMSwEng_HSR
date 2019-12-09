@@ -1,3 +1,10 @@
+/*
+ *	\file			serialportwriter.cpp
+ *	\date			04.10.2019
+ *	\author			Ramon Carlucci
+ *	\version		3.0
+ */
+
 /****************************************************************************
 **
 ** Copyright (C) 2013 Laszlo Papp <lpapp@kde.org>
