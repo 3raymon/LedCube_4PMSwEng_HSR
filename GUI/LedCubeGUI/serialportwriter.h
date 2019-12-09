@@ -1,3 +1,10 @@
+/*!
+ *	\file			serialportwriter.h
+ *	\date			04.10.2019
+ *	\author			Ramon Carlucci
+ *	\version		3.0
+ */
+
 /****************************************************************************
 **
 ** Copyright (C) 2013 Laszlo Papp <lpapp@kde.org>
@@ -61,15 +68,37 @@ QT_BEGIN_NAMESPACE
 
 QT_END_NAMESPACE
 
+/*!
+	   \brief class for communication on serial port
+*/
 class SerialPortWriter : public QObject
 {
     Q_OBJECT
 
 public:
     explicit SerialPortWriter(QSerialPort *serialPort, QObject *parent = nullptr);
+
+	/*!
+		\brief writes out writeData to the Serial Port
+	*/
     void write(const QByteArray &writeData);
 
+	/*!
+		\brief set the Serial Port
+	*/
     void setSerialPort(QSerialPort *serialPort);
+
+	/*!
+	 * \brief get informations about attached serial port devices, its used only for debugging.
+	 *
+	 * Function will write following informations to cout
+	 * - port name
+	 * - desciption
+	 * - serial number
+	 * - system location
+	 * - vendor identifier
+	 * - product identifier
+	*/
     void getSerialPortInfos() const;
 
 private slots:

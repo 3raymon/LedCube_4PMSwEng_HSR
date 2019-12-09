@@ -1,3 +1,10 @@
+/*!
+ *	\file			mainwindow.h
+ *	\date			04.10.2019
+ *	\author			Ramon Carlucci
+ *	\version		3.0
+ */
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -12,6 +19,9 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+/*!
+	   \brief class for GUI
+*/
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -22,8 +32,8 @@ public:
 
 private slots:
 
-    /**
-     * @brief If programm button 1 is clicked, programmcode "01" is sent.
+    /*!
+     * /brief If programm button 1 is clicked, programmcode "01" is sent.
      *
      * 1. buffer is cleared
      * 2. Via serialPort programmcoe "01" is sent

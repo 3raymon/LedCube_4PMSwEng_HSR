@@ -1,3 +1,10 @@
+/*
+ *	\file			mainwindow.cpp
+ *	\date			04.10.2019
+ *	\author			Ramon Carlucci
+ *	\version		3.0
+ */
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include<QSerialPortInfo>
@@ -27,16 +34,12 @@ MainWindow::MainWindow(QWidget *parent)
         ui->portStatusLabel->setText("Could not open Port at Startup");
     }
 
-    /**
-     * @brief Init SerialPort interrupt, used to interrupt as soon data arrived to read on serialPort
-     */
+
+     //Init SerialPort interrupt, used to interrupt as soon data arrived to read on serialPort
     connect(&serialPort, &QSerialPort::readyRead, this, &MainWindow::onReadyRead);
 
-    /**
-     * @brief List containing programmButtons
-     *
-     * Used for easyer handling with programmButton updates
-     */
+     //List containing programmButtons
+     // Used for easyer handling with programmButton updates
     programmButtons.append(ui->programm1Button);
     programmButtons.append(ui->programm2Button);
     programmButtons.append(ui->programm3Button);
