@@ -134,33 +134,34 @@ $(function() {
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    Q_OBJECT</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_serial_port_writer.html">SerialPortWriter</a>(QSerialPort *serialPort, QObject *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serial_port_writer.html#a3dfddb3494badc0f271bd0df18851061">write</a>(<span class="keyword">const</span> QByteArray &amp;writeData);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_serial_port_writer.html#a3b5369d4b5e6aba6da90b94fdde1f5d1">SerialPortWriter</a>(QSerialPort *serialPort, QObject *parent = <span class="keyword">nullptr</span>);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serial_port_writer.html#a5c5193b0885bf562d7107ca105f2fd3a">setSerialPort</a>(QSerialPort *serialPort);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serial_port_writer.html#a8379c3e5e43e8c6f166a6deb93bba5a7">getSerialPortInfos</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="keyword">private</span> slots:</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <span class="keywordtype">void</span> handleBytesWritten(qint64 bytes);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordtype">void</span> handleTimeout();</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordtype">void</span> handleError(QSerialPort::SerialPortError error);</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    QSerialPort *m_serialPort = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    QByteArray m_writeData;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    QTextStream m_standardOutput;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    qint64 m_bytesWritten = 0;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    QTimer m_timer;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;};</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif // SERIALPORTWRITER_H</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serial_port_writer.html#a3dfddb3494badc0f271bd0df18851061">write</a>(<span class="keyword">const</span> QByteArray &amp;writeData);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serial_port_writer.html#a5c5193b0885bf562d7107ca105f2fd3a">setSerialPort</a>(QSerialPort *serialPort);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serial_port_writer.html#a8379c3e5e43e8c6f166a6deb93bba5a7">getSerialPortInfos</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="keyword">private</span> slots:</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">void</span> handleBytesWritten(qint64 bytes);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">void</span> handleTimeout();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> handleError(QSerialPort::SerialPortError error);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    QSerialPort *m_serialPort = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    QByteArray m_writeData;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    QTextStream m_standardOutput;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    qint64 m_bytesWritten = 0;</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    QTimer m_timer;</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;};</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">#endif // SERIALPORTWRITER_H</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclass_serial_port_writer_html_a3dfddb3494badc0f271bd0df18851061"><div class="ttname"><a href="class_serial_port_writer.html#a3dfddb3494badc0f271bd0df18851061">SerialPortWriter::write</a></div><div class="ttdeci">void write(const QByteArray &amp;writeData)</div><div class="ttdoc">writes out writeData to the Serial Port</div><div class="ttdef"><b>Definition:</b> serialportwriter.cpp:107</div></div>
-<div class="ttc" id="aclass_serial_port_writer_html"><div class="ttname"><a href="class_serial_port_writer.html">SerialPortWriter</a></div><div class="ttdoc">class for communication on serial port</div><div class="ttdef"><b>Definition:</b> serialportwriter.h:73</div></div>
+<div class="ttc" id="aclass_serial_port_writer_html"><div class="ttname"><a href="class_serial_port_writer.html">SerialPortWriter</a></div><div class="ttdoc">class for communication on serial port inherits from QObject</div><div class="ttdef"><b>Definition:</b> serialportwriter.h:73</div></div>
 <div class="ttc" id="aclass_serial_port_writer_html_a8379c3e5e43e8c6f166a6deb93bba5a7"><div class="ttname"><a href="class_serial_port_writer.html#a8379c3e5e43e8c6f166a6deb93bba5a7">SerialPortWriter::getSerialPortInfos</a></div><div class="ttdeci">void getSerialPortInfos() const</div><div class="ttdoc">get informations about attached serial port devices, its used only for debugging.</div><div class="ttdef"><b>Definition:</b> serialportwriter.cpp:135</div></div>
 <div class="ttc" id="aclass_serial_port_writer_html_a5c5193b0885bf562d7107ca105f2fd3a"><div class="ttname"><a href="class_serial_port_writer.html#a5c5193b0885bf562d7107ca105f2fd3a">SerialPortWriter::setSerialPort</a></div><div class="ttdeci">void setSerialPort(QSerialPort *serialPort)</div><div class="ttdoc">set the Serial Port</div><div class="ttdef"><b>Definition:</b> serialportwriter.cpp:130</div></div>
+<div class="ttc" id="aclass_serial_port_writer_html_a3b5369d4b5e6aba6da90b94fdde1f5d1"><div class="ttname"><a href="class_serial_port_writer.html#a3b5369d4b5e6aba6da90b94fdde1f5d1">SerialPortWriter::SerialPortWriter</a></div><div class="ttdeci">SerialPortWriter(QSerialPort *serialPort, QObject *parent=nullptr)</div><div class="ttdoc">explicit Constructor</div><div class="ttdef"><b>Definition:</b> serialportwriter.cpp:62</div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">

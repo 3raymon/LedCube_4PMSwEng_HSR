@@ -20,14 +20,22 @@ namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 /*!
-	   \brief class for GUI
+	   \brief class for GUI inherits from QMainWindow
 */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+	/*!
+	   \brief Constructor
+	   \param parent set to nullptr to set as Top-Level Widget
+	*/
     MainWindow(QWidget *parent = nullptr);
+
+	/*!
+	   \brief Deconstructor
+	*/
     ~MainWindow();
 
 private slots:

@@ -15,14 +15,22 @@
 #include "ui_mainwindow.h"
 
  /*!
-		\brief class for testing function of the GUI-buttons
+		\brief class for testing function of the GUI-buttons, inherits from QObject
 */
 class TestProgrammButtons : public QObject
 {
     Q_OBJECT
 
 public:
+	/*!
+		\brief Constructor
+		\param parent set to nullptr to set as object without parent
+	*/
     explicit TestProgrammButtons(QObject *parent = nullptr);
+	
+	/*!
+	   \brief Deconstructor
+	*/
     ~TestProgrammButtons();
 
 signals:

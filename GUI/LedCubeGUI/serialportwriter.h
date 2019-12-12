@@ -69,22 +69,29 @@ QT_BEGIN_NAMESPACE
 QT_END_NAMESPACE
 
 /*!
-	   \brief class for communication on serial port
+	   \brief class for communication on serial port inherits from QObject
 */
 class SerialPortWriter : public QObject
 {
     Q_OBJECT
 
 public:
+	/*!
+		\brief explicit Constructor
+		\param serialPort active Serial Port
+		\param parent set to nullptr to set as object without parent
+	*/
     explicit SerialPortWriter(QSerialPort *serialPort, QObject *parent = nullptr);
 
 	/*!
 		\brief writes out writeData to the Serial Port
+		\param writeData Buffer for Data to write
 	*/
     void write(const QByteArray &writeData);
 
 	/*!
 		\brief set the Serial Port
+		\param serialPort set Port on which Arduino is connected
 	*/
     void setSerialPort(QSerialPort *serialPort);
 

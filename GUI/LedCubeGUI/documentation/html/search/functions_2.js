@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['write_17',['write',['../class_serial_port_writer.html#a3dfddb3494badc0f271bd0df18851061',1,'SerialPortWriter']]]
+  ['serialportwriter_19',['SerialPortWriter',['../class_serial_port_writer.html#a3b5369d4b5e6aba6da90b94fdde1f5d1',1,'SerialPortWriter']]],
+  ['setserialport_20',['setSerialPort',['../class_serial_port_writer.html#a5c5193b0885bf562d7107ca105f2fd3a',1,'SerialPortWriter']]]
 ];

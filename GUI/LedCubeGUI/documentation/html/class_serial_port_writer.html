@@ -69,7 +69,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>class for communication on serial port  
+<p>class for communication on serial port inherits from QObject  
  <a href="class_serial_port_writer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="serialportwriter_8h_source.html">serialportwriter.h</a>&gt;</code></p>
@@ -82,24 +82,68 @@ Inheritance diagram for SerialPortWriter:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3b5369d4b5e6aba6da90b94fdde1f5d1"><td class="memItemLeft" align="right" valign="top"><a id="a3b5369d4b5e6aba6da90b94fdde1f5d1"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SerialPortWriter</b> (QSerialPort *serialPort, QObject *parent=nullptr)</td></tr>
+<tr class="memitem:a3b5369d4b5e6aba6da90b94fdde1f5d1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serial_port_writer.html#a3b5369d4b5e6aba6da90b94fdde1f5d1">SerialPortWriter</a> (QSerialPort *serialPort, QObject *parent=nullptr)</td></tr>
+<tr class="memdesc:a3b5369d4b5e6aba6da90b94fdde1f5d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">explicit Constructor  <a href="class_serial_port_writer.html#a3b5369d4b5e6aba6da90b94fdde1f5d1">More...</a><br /></td></tr>
 <tr class="separator:a3b5369d4b5e6aba6da90b94fdde1f5d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dfddb3494badc0f271bd0df18851061"><td class="memItemLeft" align="right" valign="top"><a id="a3dfddb3494badc0f271bd0df18851061"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serial_port_writer.html#a3dfddb3494badc0f271bd0df18851061">write</a> (const QByteArray &amp;writeData)</td></tr>
-<tr class="memdesc:a3dfddb3494badc0f271bd0df18851061"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes out writeData to the Serial Port <br /></td></tr>
+<tr class="memitem:a3dfddb3494badc0f271bd0df18851061"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serial_port_writer.html#a3dfddb3494badc0f271bd0df18851061">write</a> (const QByteArray &amp;writeData)</td></tr>
+<tr class="memdesc:a3dfddb3494badc0f271bd0df18851061"><td class="mdescLeft">&#160;</td><td class="mdescRight">writes out writeData to the Serial Port  <a href="class_serial_port_writer.html#a3dfddb3494badc0f271bd0df18851061">More...</a><br /></td></tr>
 <tr class="separator:a3dfddb3494badc0f271bd0df18851061"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c5193b0885bf562d7107ca105f2fd3a"><td class="memItemLeft" align="right" valign="top"><a id="a5c5193b0885bf562d7107ca105f2fd3a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serial_port_writer.html#a5c5193b0885bf562d7107ca105f2fd3a">setSerialPort</a> (QSerialPort *serialPort)</td></tr>
-<tr class="memdesc:a5c5193b0885bf562d7107ca105f2fd3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the Serial Port <br /></td></tr>
+<tr class="memitem:a5c5193b0885bf562d7107ca105f2fd3a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serial_port_writer.html#a5c5193b0885bf562d7107ca105f2fd3a">setSerialPort</a> (QSerialPort *serialPort)</td></tr>
+<tr class="memdesc:a5c5193b0885bf562d7107ca105f2fd3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">set the Serial Port  <a href="class_serial_port_writer.html#a5c5193b0885bf562d7107ca105f2fd3a">More...</a><br /></td></tr>
 <tr class="separator:a5c5193b0885bf562d7107ca105f2fd3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8379c3e5e43e8c6f166a6deb93bba5a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serial_port_writer.html#a8379c3e5e43e8c6f166a6deb93bba5a7">getSerialPortInfos</a> () const</td></tr>
 <tr class="memdesc:a8379c3e5e43e8c6f166a6deb93bba5a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">get informations about attached serial port devices, its used only for debugging.  <a href="class_serial_port_writer.html#a8379c3e5e43e8c6f166a6deb93bba5a7">More...</a><br /></td></tr>
 <tr class="separator:a8379c3e5e43e8c6f166a6deb93bba5a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>class for communication on serial port </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<div class="textblock"><p>class for communication on serial port inherits from QObject </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a3b5369d4b5e6aba6da90b94fdde1f5d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b5369d4b5e6aba6da90b94fdde1f5d1">&#9670;&nbsp;</a></span>SerialPortWriter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SerialPortWriter::SerialPortWriter </td>
+          <td>(</td>
+          <td class="paramtype">QSerialPort *&#160;</td>
+          <td class="paramname"><em>serialPort</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QObject *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>nullptr</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>explicit Constructor </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">serialPort</td><td>active Serial Port </td></tr>
+    <tr><td class="paramname">parent</td><td>set to nullptr to set as object without parent </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a8379c3e5e43e8c6f166a6deb93bba5a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8379c3e5e43e8c6f166a6deb93bba5a7">&#9670;&nbsp;</a></span>getSerialPortInfos()</h2>
 
@@ -124,6 +168,58 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 <li>vendor identifier</li>
 <li>product identifier </li>
 </ul>
+
+</div>
+</div>
+<a id="a5c5193b0885bf562d7107ca105f2fd3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c5193b0885bf562d7107ca105f2fd3a">&#9670;&nbsp;</a></span>setSerialPort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SerialPortWriter::setSerialPort </td>
+          <td>(</td>
+          <td class="paramtype">QSerialPort *&#160;</td>
+          <td class="paramname"><em>serialPort</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>set the Serial Port </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">serialPort</td><td>set Port on which Arduino is connected </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3dfddb3494badc0f271bd0df18851061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dfddb3494badc0f271bd0df18851061">&#9670;&nbsp;</a></span>write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SerialPortWriter::write </td>
+          <td>(</td>
+          <td class="paramtype">const QByteArray &amp;&#160;</td>
+          <td class="paramname"><em>writeData</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>writes out writeData to the Serial Port </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">writeData</td><td>Buffer for Data to write </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
