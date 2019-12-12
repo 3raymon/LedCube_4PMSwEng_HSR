@@ -144,7 +144,7 @@ public:
 	 * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
 	 */
 
-	void ebeneNachLinks(struct ledarray* struct_ptr);	//Noch nicht getestet
+	void ebeneNachLinks(struct ledarray* struct_ptr);
 
 
 	/*!
@@ -153,7 +153,7 @@ public:
 	 * \param [in,out]	structptr	Pointer auf zu bearbeitendes Array
 	 */
 
-	void ebeneNachRechts(struct ledarray* struct_ptr);	//Noch nicht getestet
+	void ebeneNachRechts(struct ledarray* struct_ptr);
 
 
 	/*!
@@ -165,7 +165,7 @@ public:
 	 * \param 		  	flaeche		  	Auswahl der Flaeche
 	 */
 
-	void seitlicheFlaecheOn(struct ledarray* struct_ptr, int flaeche);	//Noch nicht getestet
+	void seitlicheFlaecheOn(struct ledarray* struct_ptr, int flaeche);
 
 
 	/*!
@@ -177,7 +177,7 @@ public:
 	 * \param 		  	flaeche		  	Auswahl der Flaeche
 	 */
 
-	void seitlicheFlaecheOff(struct ledarray* struct_ptr, int flaeche);	//Noch nicht getestet
+	void seitlicheFlaecheOff(struct ledarray* struct_ptr, int flaeche);	
 
 
 	/*!
@@ -227,7 +227,7 @@ public:
 	 * 			geschoben.
 	 */
 
-	void linksrechts(void);		//Noch nicht getestet
+	void linksrechts(void);
 
 
 	/*!

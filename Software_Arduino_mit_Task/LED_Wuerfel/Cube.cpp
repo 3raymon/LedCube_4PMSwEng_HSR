@@ -520,7 +520,7 @@ void Cube::rain(void)			//Darstellung von Regen auf LED-Cube
 {
 	ledarray rainarray;
 	pinMode(13, OUTPUT); //loeschen
-	for (int z1 = 0; z1 < 60; z1++)
+	for (int z1 = 0; z1 < 1000; z1++)
 	{
 		for (int z2 = 0; z2 < 2; z2++)
 		{
@@ -663,7 +663,7 @@ void Cube::linksrechts(void)
 		pause = pause - 30;
 		for (int z3 = 6; z3 >= 0; z3--)
 		{
-			seitlicheFlaecheOff(&linksrechtsarray, z3);
+			seitlicheFlaecheOn(&linksrechtsarray, z3);
 			z3++;
 			seitlicheFlaecheOff(&linksrechtsarray, z3);
 			z3--;
@@ -688,7 +688,7 @@ void Cube::pingpong(void)
 	int x = 0;
 	int y = 0;
 
-	for (int z1 = 35; z1 >= 0; z1--)
+	for (int z1 = 40; z1 >= 0; z1--)
 	{
 		x = random(0, 8);		//Zufallswerte generieren
 		y = random(0, 8);
@@ -706,7 +706,7 @@ void Cube::pingpong(void)
 	}
 	werteUebernehmen(&pingpongarray);
 	int richtung = 0; //Richtung = 0 nach unten schieben, Richtung = 1 nach oben schieben
-	for (int z4 = 0; z4 < 30; z4++)
+	for (int z4 = 0; z4 < 300; z4++)
 	{
 		do
 		{
@@ -720,7 +720,7 @@ void Cube::pingpong(void)
 			pingpongarray.a[x][y][z] = 1;
 			z++;
 			werteUebernehmen(&pingpongarray);
-			vTaskDelay(40 / portTICK_PERIOD_MS);
+			vTaskDelay(50 / portTICK_PERIOD_MS);
 		}
 		do
 		{
@@ -734,7 +734,7 @@ void Cube::pingpong(void)
 			pingpongarray.a[x][y][z] = 1;
 			z--;
 			werteUebernehmen(&pingpongarray);
-			vTaskDelay(40 / portTICK_PERIOD_MS);
+			vTaskDelay(50 / portTICK_PERIOD_MS);
 		}
 	}
 }
@@ -749,44 +749,41 @@ void Cube::pingpong(void)
 void Cube::snake(void)
 {
 	ledarray snakearray;
-	int x = 0;
-	int y = 0;
+	int x = 3;
+	int y = 3;
 	int richtungxy = 0;
-
-	x = random(0, 8);		//Zufaelliger Startwert generieren
-	y = random(0, 8);
 
 	snakearray.a[x][y][7] = 1;
 	werteUebernehmen(&snakearray);
 
 	for (int z1 = 0; z1 < 100; z1++)
 	{
-		richtungxy = random(0, 3);
+		richtungxy = random(0, 4);
 		switch (richtungxy)
 		{
 		case 0 :	//positive x Richtung Topansicht von links nach rechts
-			if (snakearray.a[7][y][7] != 1)
+			if (snakearray.a[7][y][6] != 1)
 			{
 				x++;
-			}
+			} else x--;
 			break;
 		case 1 :	//negative x Richtung Topansicht von rechts nach links
-			if (snakearray.a[0][y][7] != 1)
+			if (snakearray.a[0][y][6] != 1)
 			{
 				x--;
-			}
+			} else x++;
 			break;
 		case 2 :	//positive y Richtung Topansicht von hinten nach vorne
-			if (snakearray.a[x][7][7] != 1)
+			if (snakearray.a[x][7][6] != 1)
 			{
 				y++;
-			}
+			} else y--;
 			break;
 		case 3 :	//negative y Richtung Topansicht von vorne nach hinten
-			if (snakearray.a[x][0][7] != 1)
+			if (snakearray.a[x][0][6] != 1)
 			{
 				y--;
-			}
+			} else y++;
 			break;
 		}
 		vTaskDelay(250 / portTICK_PERIOD_MS);
